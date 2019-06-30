@@ -1,0 +1,108 @@
+@import 'normalize.css';
+
+html {
+	font-size: 16px;
+}
+
+.app__body {
+	font-family: 'Lato', sans-serif;
+}
+
+header {
+	height: 10vh;
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+}
+
+.app__header__logo_wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 70%;
+	width: 10%;
+	-ms-flex-item-align: center;
+	align-self: center;
+}
+
+.app__logo {
+	height: 100%;
+}
+
+nav {
+	width: 70%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+ul {
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	list-style-type: none;
+	text-transform: uppercase;
+}
+
+main {
+	height: 90vh;
+	text-align: center;
+}
+
+.app__main__form {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.main__form__input_wrapper{
+	height: 10vh;
+	width: 25%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	
+}
+
+
+footer {
+	height: 10vh;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+	text-align: center;
+}

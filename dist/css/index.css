@@ -1,0 +1,794 @@
+@import 'normalize.css';
+
+/*Common styles*/
+
+html {
+	font-size: 16px;
+}
+
+.app__body {
+	font-family: 'Lato', sans-serif;
+}
+
+input,
+button,
+textarea {
+	outline: none;
+}
+
+input:disabled {
+	background-color: #fff;
+}
+
+/*END Common styles*/
+
+
+
+/*Header styles*/
+header {
+	height: 8vh;
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	background: -webkit-linear-gradient(255deg, #fff, rgba(34, 193, 219, .1));
+	background: -o-linear-gradient(255deg, #fff, rgba(34, 193, 219, .1));
+	background: linear-gradient(195deg, #fff, rgba(34, 193, 219, .1));
+}
+
+.app__header__logo_wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	height: 70%;
+	width: 10%;
+	-ms-flex-item-align: center;
+	align-self: center;
+}
+
+.app__logo {
+	height: 100%;
+	width: 100%;
+}
+
+nav {
+	width: 85%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.menu {
+	width: 100%;
+	padding: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	list-style-type: none;
+	font-size: 1em;
+	letter-spacing: 1px;
+}
+
+.menu_point {
+	cursor: pointer;
+}
+
+/*END Header styles*/
+
+
+/*Main styles*/
+.app__h1 {
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+main {
+	min-height: 81vh;
+	text-align: center;
+}
+
+/*Volumes of cash page styles*/
+.object__passport {
+	letter-spacing: 1px;
+}
+
+.object__passport button {
+	margin-top: 3%;
+}
+
+.object__passport__col__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 85%;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	margin-left: 7.5%;
+}
+
+.label_input_wrapper {
+	text-align: left;
+	margin-top: 3%;
+	font-weight: 550;
+}
+
+.label_input_wrapper:first-of-type {
+	margin-top: 0%;
+}
+
+#objectName {
+	font-size: 1em;
+}
+
+.label_input_wrapper label {
+	display: block;
+}
+
+.large_col {
+	width: 70%;
+}
+
+.small_col {
+	width: 30%;
+	height: 50vh;
+}
+
+.start_col {
+	-webkit-box-align: start;
+	-ms-flex-align: start;
+	align-items: flex-start;
+}
+
+.inForm__row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.large_input {
+	width: 65%;
+}
+
+.medium_input {
+	width: 45%;
+}
+
+.small_input {
+	width: 25%;
+}
+
+.object__passport input {
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .3);
+	margin-top: 1%;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	font-size: 1.2em;
+}
+
+.object__passport input:hover {
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	border-bottom-color: rgba(34, 193, 219, .5);
+}
+
+.object__passport__textarea {
+	border-radius: 5px;
+	max-height: 100%;
+	max-width: 100%;
+	min-height: 100%;
+	min-width: 100%;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	border: none;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
+
+.object__passport__col,
+.passport__ul__label,
+.passport__ul,
+.label__input__wrapper,
+.inForm_col {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+.passport__ul {
+	padding: 0;
+	list-style-type: none;
+}
+
+.passport__ul li {
+	margin-top: 1%;
+}
+
+.object__passport__cost_price {
+	width: 85%;
+	margin-left: 7.5%;
+}
+
+.centering_label {
+	text-align: center;
+}
+
+#totalCostPrice,
+#totalRevenue {
+	text-align: center;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, .3);
+	box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, .3);
+}
+
+/*---------------------------------------------*/
+.app__main__form {
+	height: 65vh;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.main__form__input_wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	font-weight: 550;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.column_wrapper {
+	height: 11vh;
+	width: 30%;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+#errorSpan {
+	margin: 0;
+}
+
+.row_wrapper {
+	width: 75%;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+}
+
+.input_wrapper__text,
+.row_input,
+.input_wrapper__span {
+	width: 33%;
+}
+
+.input_wrapper__text {
+	text-align: left;
+}
+
+.input_wrapper__span {
+	text-align: right;
+}
+
+
+.input_wrapper__input {
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	border-bottom-color: rgba(28, 32, 51, 0);
+	font-weight: 550;
+	letter-spacing: 1px;
+	text-align: center;
+	font-size: 1.5em;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .5);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	border-radius: 10px;
+}
+
+.input_wrapper__input:hover,
+.main__form__button:hover,
+#setBuildingPeriodButton:hover,
+#enterCashButton:hover,
+#CountPercentPayments:hover,
+#removeCashButton:hover,
+#enterRevenueCashButton:hover,
+#removeRevenueCashButton:hover,
+.object__passport__textarea:focus,
+.object__passport__textarea:hover,
+#chartPageSelect:hover {
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, .5);
+	box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, .5);
+}
+
+.candy_wrapper_span {
+	font-weight: 500;
+	font-size: 1.5em;
+}
+
+.input_wrapper__span {
+	font-weight: 500;
+	font-size: .7em;
+	color: gray;
+}
+
+.app__main__buttons_wrapper {
+	width: 24.75%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+
+.main__form__button {
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	background: white;
+	cursor: pointer;
+	border: none;
+	letter-spacing: 1px;
+	border-radius: 10px;
+	height: 5vh;
+	width: 20%;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	background: -webkit-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
+	background: -o-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
+	background: linear-gradient(195deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
+}
+
+.main__chart__wrapper {
+	width: 40%;
+	margin-left: 30%;
+}
+
+/*END Volumes of cash page styles*/
+
+/*Chart and sources page styles*/
+
+#chartPageSelect {
+	width: 33%;
+	height: 5vh;
+	text-align-last: center;
+	border-radius: 20px;
+	border: none;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	outline: none;
+	cursor: pointer;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
+
+.main__chartPage__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.chartPage__wrapper__left_block {
+	width: 20%;
+}
+
+.left_block__input_wrapper {
+	margin-top: 5%;
+}
+
+
+.chartPage__wrapper__right_block {
+	width: 75%;
+}
+
+.left_block__input_wrapper input {
+	width: 54%;
+	border: none;
+	border-radius: 20px;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .3);
+	box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, .3);
+	font-weight: 650;
+	text-align: center;
+}
+
+#deleteVariant {
+	margin-top: 5%;
+	color: white;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	background-color: rgba(193, 0, 0, 0.7);
+	border: none;
+	border-radius: 20px;
+	cursor: pointer;
+}
+
+#totalValueChart,
+#deficiteSumChart {
+	background-color: white;
+}
+
+#ownCashChart {
+	background-color: rgba(255, 99, 132, 0.1);
+}
+
+#bankCreditChart,
+.bankTd {
+	background-color: rgba(54, 162, 235, 0.2);
+}
+
+#escrowResourceChart,
+.escrowTd {
+	background-color: rgba(255, 206, 86, 0.2);
+}
+
+#investorAChart,
+.investorATd {
+	background-color: rgba(125, 192, 192, 0.2);
+}
+
+#investorBChart,
+.investorBTd {
+	background-color: rgba(153, 102, 255, 0.2);
+}
+
+.chart_options__set_period__wrapper,
+.chart_options__add_cash__wrapper {
+	height: 18vh;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center
+}
+
+.set_period__select,
+.set_period__input {
+	font-size: 1em;
+	border-radius: 20px;
+	border: none;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	outline: none;
+	cursor: pointer;
+}
+
+.set_period__input {
+	width: 15%;
+	cursor: auto;
+}
+
+.add_cash__input {
+	font-size: 1em;
+}
+
+.chart_options__add_cash__buttons {
+	width: 50%;
+}
+
+#setBuildingPeriodButton,
+#enterCashButton,
+#CountPercentPayments,
+#removeCashButton,
+#enterRevenueCashButton,
+#removeRevenueCashButton {
+	height: 20%;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+	background: white;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+}
+
+#enterCashButton,
+#removeCashButton,
+#enterRevenueCashButton,
+#removeRevenueCashButton {
+	height: auto;
+	width: 5%;
+}
+
+#CountPercentPayments {
+	margin-top: 2%;
+}
+
+.chart_page__table__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+#chartPageTable {
+	width: 85%;
+}
+
+.monthTd {
+	width: 15%;
+	text-align: left;
+}
+
+.table_input {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+#chartPageTable,
+tr,
+td {
+	border: 1px solid rgba(28, 32, 51, .25);
+	border-radius: 5px;
+}
+
+#chartPageTable {
+	border-color: rgba(28, 32, 51, .15);
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	border-radius: 5px;
+}
+
+.revenue_chart__aside {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	border-radius: 10px;
+}
+
+/*END chart and sources page styles*/
+
+
+/*United chart page styles*/
+.main__united_chart__options__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.main__united_chart__options {
+	width: 50%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
+}
+
+.main__united_chart__wrapper {
+	width: 40%;
+}
+
+/*multiselect-checkbox*/
+.united_chart__form {
+	width: 100%;
+}
+
+.multiselect,
+#buildUnitedChart,
+#reloadUnitedChart,
+#deleteUnitedChart {
+	width: 100%;
+	height: 5vh;
+	text-align-last: center;
+	border-radius: 20px;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	cursor: pointer;
+}
+
+#buildUnitedChart {
+	width: 40%;
+	border: none;
+	background-color: white;
+}
+
+#reloadUnitedChart,
+#deleteUnitedChart {
+	width: 40%;
+	border: none;
+	color: white;
+}
+
+#reloadUnitedChart {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, 0.7);
+	box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, 0.7);
+	background-color: rgb(34, 193, 219);
+}
+
+#deleteUnitedChart {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	background-color: rgba(193, 0, 0, 0.7);
+}
+
+.selectBox {
+	position: relative;
+	height: 100%;
+}
+
+.selectBox select {
+	width: 100%;
+	height: 100%;
+	border: none;
+	border-radius: 20px;
+	outline: none;
+}
+
+.overSelect {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#checkBoxes {
+	border: 1px #dadada solid;
+}
+
+#checkBoxes label {
+	text-align: left;
+	display: block;
+	-webkit-transition: .2s;
+	-o-transition: .2s;
+	transition: .2s;
+	background-color: white;
+}
+
+#checkBoxes label:hover {
+	background-color: #1e90ff;
+}
+
+
+.united_chart__chart_wrapper {
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 2%;
+}
+
+/*END united chart page styles*/
+
+
+/*END Main styles*/
+
+/*Footer styles*/
+footer {
+	margin-top: 3vh;
+	height: 8vh;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .15);
+	background: -webkit-linear-gradient(285deg, white, rgba(28, 32, 51, .1));
+	background: -o-linear-gradient(285deg, white, rgba(28, 32, 51, .1));
+	background: linear-gradient(-195deg, white, rgba(28, 32, 51, .1));
+}
+
+/*END Footer styles*/
+
+
+/*Additional styles for different blocks*/
+.light_blue {
+	color: rgb(34, 193, 219);
+}
+
+.dark_blue {
+	color: rgb(28, 32, 51);
+}
+
+.green {
+	color: rgb(0, 125, 52);
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
+}
+
+.show_flex {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.input_error {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(93, 0, 0, 0.7);
+	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	color: rgba(193, 0, 0, 0.7);
+}
+
+.block_error {
+	color: rgba(193, 0, 0, 0.7);
+}
+
+.input_error:hover {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(93, 0, 0, 0.7);
+	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
+	color: rgba(193, 0, 0, 0.7);
+}
