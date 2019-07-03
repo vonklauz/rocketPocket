@@ -133,12 +133,13 @@ main {
 	font-weight: 550;
 }
 
-.label_input_wrapper:first-of-type {
+/*.label_input_wrapper:first-of-type {
 	margin-top: 0%;
-}
+}*/
 
 #objectName {
 	font-size: 1em;
+	border-bottom: 1px solid rgba(0, 0, 0, .3);
 }
 
 .label_input_wrapper label {
@@ -182,7 +183,6 @@ main {
 
 .object__passport input {
 	border: none;
-	border-bottom: 1px solid rgba(0, 0, 0, .3);
 	margin-top: 1%;
 	-webkit-transition: .5s;
 	-o-transition: .5s;
@@ -209,6 +209,15 @@ main {
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
+	margin-top: 7%;
+}
+
+.small_input,
+.micro_input {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	border-radius: 20px;
+	text-align: center;
 }
 
 .object__passport__col,
@@ -234,6 +243,11 @@ main {
 	margin-top: 1%;
 }
 
+.passport__ul button{
+	background: #fff;
+	cursor: pointer;
+}
+
 .object__passport__cost_price {
 	width: 85%;
 	margin-left: 7.5%;
@@ -249,6 +263,14 @@ main {
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, .3);
 	box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, .3);
+}
+
+.percents_and_middle_cost__wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
 }
 
 /*---------------------------------------------*/
@@ -343,7 +365,8 @@ main {
 #removeRevenueCashButton:hover,
 .object__passport__textarea:focus,
 .object__passport__textarea:hover,
-#chartPageSelect:hover {
+#chartPageSelect:hover,
+.basic_style:hover {
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
@@ -751,6 +774,16 @@ footer {
 
 
 /*Additional styles for different blocks*/
+.basic_style {
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	border: none;
+	border-radius: 20px;
+	-webkit-transition: .5s;
+	-o-transition: .5s;
+	transition: .5s;
+}
+
 .light_blue {
 	color: rgb(34, 193, 219);
 }
@@ -781,6 +814,11 @@ footer {
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(93, 0, 0, 0.7);
 	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
 	color: rgba(193, 0, 0, 0.7);
+}
+
+.small_error{
+	color: rgba(193, 0, 0, 0.7);
+	display: block;
 }
 
 .block_error {

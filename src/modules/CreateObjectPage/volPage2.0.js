@@ -1,5 +1,8 @@
 import Chart from 'chart.js'
-import ObjectOfBuilding from './Classes'
+import {
+	VariantOfFinancing
+} from '../commonFiles/Classes'
+
 (function () {
 	const form = document.querySelector('.app__main__form')
 	//Активные поля ввода для источников финансирования, без общей суммы и неактивных для пользовательского ввода полей
@@ -74,7 +77,7 @@ import ObjectOfBuilding from './Classes'
 		isOverflow = countDeficite()
 		if (!isOverflow) {
 			if (!localStorage['variant' + localStorage.length]) {
-				localStorage.setItem('variant' + localStorage.length, JSON.stringify(new ObjectOfBuilding(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + localStorage.length))))
+				localStorage.setItem('variant' + localStorage.length, JSON.stringify(new VariantOfFinancing(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + localStorage.length))))
 				alert('Объект успешно сохранён.')
 			} else if (localStorage['variant' + localStorage.length]) {
 				let n = localStorage.length

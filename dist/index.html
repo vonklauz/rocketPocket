@@ -24,16 +24,15 @@
 	</header>
 	<main class="app__main">
 		<div id="volumePage" class="hide">
-			<h1 class="app__h1">Объём и источники финансирования проекта (план)</h1>
+			<h1 class="app__h1">Информация о объекте</h1>
 			<select name="" id="chartPageSelect">
 			</select>
 			<form action="" class="object__passport">
-				<h3>Информация об объекте</h3>
 				<div class="object__passport__col__wrapper ">
 					<div class="object__passport__col large_col">
 						<div class="label_input_wrapper">
 							<label for="" class="object__passport__label">Название объекта*</label>
-							<input class="large_input" type="text" id="objectName" maxlength="60" placeholder="Макс. 60 символов">
+							<input class="large_input" type="text" id="objectName" maxlength="60" placeholder="5 - 60 символов">
 						</div>
 						<div class="label_input_wrapper">
 							<label for="" class="object__passport__label">Сметная стоимость*</label><input class="small_input number_input" type="text" id="objectEstimate">
@@ -42,55 +41,61 @@
 							<label for="" class="object__passport__label">Объём м<sup>2</sup> к реализации*</label><input class="small_input number_input" type="text" id="objectArea">
 						</div>
 						<div class="label_input_wrapper">
-							<label for="" class="passport__ul__label">
-								<label for="passportUl">В том числе (м<sup>2</sup>):</label>
+								<label for="passportUl" id="passportUlLabel">В том числе (м<sup>2</sup>):</label>
 								<ul class="passport__ul" id="passportUl">
-									<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input" id="objectFlats"></li>
-									<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input" id="objectCommerce"></li>
-									<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input" id="objectCommerce"></li>
-									<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input" id="objectCommerce"></li>
-									<li><label for="" class="object__passport__label">Парковка</label><input class="number_input" type="text" id="objectParking"></li>
+									<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input micro_input" id="flatsSquare"></li>
+									<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesSquare"></li>
+									<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeSquare"></li>
+									<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesSquare"></li>
+									<li><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingSquare"></li>
 								</ul>
-							</label>
 						</div>
 					</div>
 					<div class="object__passport__col small_col">
-						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" placeholder="Описание объекта"></textarea>
+						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта (необязательно). Максимальная длина: 800 символов."></textarea>
 					</div>
 				</div>
-				<div class="object__passport__cost_price">
-					<h3>Определение себестоимости</h3>
+				<button class="main__form__button" id="objectPassportNextStepButton">Далее</button>
+				<div class="object__passport__cost_price hide">
 					<div class="label_input_wrapper centering_label ">
-						<label for="" class="object__passport__label light_blue">Себестоимость без(!) затрат на привлечение фин. ресурсов</label>
-						<input class="small_input light_blue number_input" type="text" id="totalCostPrice" maxlength="" placeholder="" disabled>
+						<label for="" class="object__passport__label light_blue">Себестоимость 1м<sup>2</sup> без(!) затрат на привлечение фин. ресурсов</label>
+						<input class="small_input light_blue number_input" type="text" id="m2OwnCostInput" maxlength="" placeholder="" disabled>
 					</div>
-					<div class="label_input_wrapper">
-						<label for="" class="object__passport__label ">Плановая рентабельность, %</label>
-						<input class="number_input" type="text" id="" maxlength="" placeholder="">
-					</div>
-					<div class="label_input_wrapper">
-						<label for="" class="object__passport__label ">Квартиры, %</label>
-						<input class="number_input" type="text" id="" maxlength="" placeholder="">
-					</div>
-					<div class="label_input_wrapper">
-						<label for="" class="object__passport__label ">Офисы, %</label>
-						<input class="number_input" type="text" id="" maxlength="" placeholder="">
-					</div>
-					<div class="label_input_wrapper">
-						<label for="" class="object__passport__label ">Торг. площади, %</label>
-						<input class="number_input" type="text" id="" maxlength="" placeholder="">
-					</div>
-					<div class="label_input_wrapper">
-						<label for="" class="object__passport__label ">Парковка, %</label>
-						<input class="number_input" type="text" id="" maxlength="" placeholder="">
+					<div class="percents_and_middle_cost__wrapper">
+						<div class="label_input_wrapper">
+							<label for="" class="passport__ul__label">
+								<label id="markupUlLabel" for="markupUl">Плановая рентабельность, % :</label>
+								<ul class="passport__ul" id="markupUl">
+									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input" id="flatsMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingMarkup" maxlength="4"></li>
+									<li><button class="basic_style" id="countPriceButton">Рассчитать</button></li>
+								</ul>
+							</label>
+						</div>
+						<div class="label_input_wrapper">
+							<label for="" class="passport__ul__label">
+								<label id="priceUlLabel" for="priceUl">Цена реализации 1м<sup>2</sup> :</label>
+								<ul class="passport__ul" id="priceUl">
+									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input" id="flatsPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradePrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingPrice" disabled></li>
+								</ul>
+							</label>
+						</div>
 					</div>
 					<div class="label_input_wrapper centering_label">
 						<label for="" class="object__passport__label green">Бюджет выручки без затрат на привлечение фин. ресурсов</label>
 						<input class="small_input number_input green" type="text" id="totalRevenue" maxlength="" placeholder="" disabled>
 					</div>
+					<button class="main__form__button" id="volumesOfCashSaveButton" type="submit">Сохранить новый объект</button>
+					<button class="main__form__button" id="volumesOfCashCreateObjectButton" type="reset">Задать новый объект</button>
 				</div>
-				<button class="main__form__button" id="volumesOfCashSaveButton">Сохранить новый объект</button>
-				<button class="main__form__button" id="volumesOfCashCreateObjectButton">Задать новый объект</button>
+
 			</form>
 			<!--<form action="" class="app__main__form" id="volumesOfCashForm">
 				<div class="main__form__input_wrapper light_blue column_wrapper" id="totalValueWrapper">
@@ -370,7 +375,10 @@
 			messagingSenderId: "426651486308"
 		};
 		firebase.initializeApp(config);
+
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script type="text/javascript" src="bundle.js"></script></body></html>
+<script type="text/javascript" src="bundle.js"></script></body>
+
+</html>

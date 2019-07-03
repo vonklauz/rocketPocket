@@ -1,4 +1,47 @@
-export default class ObjectOfBuilding {
+export class ObjectOfBuilding {
+	constructor() {
+		this.name = name,
+			this.estimate = {
+				ownCost: '',
+				m2OwnCost: '',
+				revenueExcludingFinRes: '',
+				revenueIncludingFinRes: ''
+			},
+			this.estate = {
+				totalSquare: '',
+				flats: {
+					flatsSquare: '',
+					flatsPlannedMarkup: '',
+					flatsPrice: '',
+				},
+				offices: {
+					officesSquare: '',
+					PlannedMarkup: '',
+					Price: '',
+				},
+				tradeArea: {
+					tradeSquare: '',
+					PlannedMarkup: '',
+					Price: '',
+				},
+				storages: {
+					storagesSquare: '',
+					PlannedMarkup: '',
+					Price: '',
+				},
+				parking: {
+					parkingSquare: '',
+					PlannedMarkup: '',
+					Price: '',
+				}
+			},
+			this.variantsOfFinancing = [],
+			this.key = 'objectOfBuilding' + Math.random()
+	}
+}
+
+
+export class VariantOfFinancing {
 	constructor(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, key) {
 		this.totalValue = {
 				currentBalance: totalValue,
