@@ -365,7 +365,7 @@ main {
 #removeRevenueCashButton:hover,
 .object__passport__textarea:focus,
 .object__passport__textarea:hover,
-#chartPageSelect:hover,
+.app_select:hover,
 .basic_style:hover {
 	-webkit-transition: .5s;
 	-o-transition: .5s;
@@ -413,6 +413,22 @@ main {
 	background: linear-gradient(195deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
 }
 
+#volumesOfCashCreateObjectButton{
+	margin-left: 2%;
+}
+
+#deleteObjectButton{
+	background: -webkit-linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
+	background: -o-linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
+	background: linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
+	margin-left: 2%;
+}
+
+#deleteObjectButton:hover{
+	-webkit-box-shadow: 0px 1px 10px 1px linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
+	box-shadow: 0px 1px 10px 1px rgba(173, 0, 0, 0.7);
+}
+
 .main__chart__wrapper {
 	width: 40%;
 	margin-left: 30%;
@@ -422,7 +438,7 @@ main {
 
 /*Chart and sources page styles*/
 
-#chartPageSelect {
+.app_select {
 	width: 33%;
 	height: 5vh;
 	text-align-last: center;

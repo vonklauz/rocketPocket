@@ -27,7 +27,7 @@ export function showLoadedData(loadedObjectsArray, $objectSelect) {
 		})
 		for (let i = 0; i < loadedObjectsArray.length; i++) {
 			option = document.createElement('option')
-			option.value = loadedObjectsArray[i].key
+			option.value = i
 			option.textContent = loadedObjectsArray[i].name
 			$objectSelect.appendChild(option)
 		}
@@ -35,7 +35,7 @@ export function showLoadedData(loadedObjectsArray, $objectSelect) {
 	} else {
 		option = document.createElement('option')
 		option.textContent = "В базе данных отсутствуют сохранённые объекты."
-		$select.appendChild(option)
+		$objectSelect.appendChild(option)
 	}
 	return loadedObjectsArray
 }

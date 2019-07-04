@@ -1,6 +1,6 @@
 export class ObjectOfBuilding {
 	constructor() {
-		this.name = name,
+		this.name = '',
 			this.estimate = {
 				ownCost: '',
 				m2OwnCost: '',
@@ -11,28 +11,28 @@ export class ObjectOfBuilding {
 				totalSquare: '',
 				flats: {
 					flatsSquare: '',
-					flatsPlannedMarkup: '',
+					flatsMarkup: '',
 					flatsPrice: '',
 				},
 				offices: {
 					officesSquare: '',
-					PlannedMarkup: '',
-					Price: '',
+					officesMarkup: '',
+					officesPrice: '',
 				},
-				tradeArea: {
+				trade: {
 					tradeSquare: '',
-					PlannedMarkup: '',
-					Price: '',
+					tradeMarkup: '',
+					tradePrice: '',
 				},
 				storages: {
 					storagesSquare: '',
-					PlannedMarkup: '',
-					Price: '',
+					storagesMarkup: '',
+					storagesPrice: '',
 				},
 				parking: {
 					parkingSquare: '',
-					PlannedMarkup: '',
-					Price: '',
+					parkingMarkup: '',
+					parkingPrice: '',
 				}
 			},
 			this.variantsOfFinancing = [],
