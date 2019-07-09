@@ -164,8 +164,8 @@ export function countCurrentWastedSum(chosenVar) {
 
 
 //Сохранение выбранного варианта финансирования после внесённых изменений
-export function saveChangesInChosenVar(chosenVar) {
-	localStorage.setItem(chosenVar.key, JSON.stringify(chosenVar))
+export function saveChangesInChosenVar(chosenObj,chosenVar) {
+	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 }
 
 
@@ -179,9 +179,10 @@ export function createTotalValueLine(chosenVar) {
 
 
 //Удаление варианта из базы
-export function deleteVariant(chosenVar) {
+export function deleteVariant(chosenObj,chosenVar) {
 	alert('Вариант удалён.')
-	delete(localStorage[chosenVar.key])
+	delete(chosenObj.variantsOfFinancing[chosenVar.key])
+	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 	window.location.reload()
 
 }

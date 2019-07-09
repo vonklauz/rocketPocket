@@ -4,7 +4,8 @@ import {
 
 import {
 	loadObjects,
-	showLoadedData
+	showLoadedData,
+	clearSelect
 } from '../commonFiles/dataLoader'
 
 (function () {
@@ -299,8 +300,8 @@ import {
 			deleteObjectButton.classList.remove('hide')
 		}
 	})
-	
-	
+
+
 	volumesOfCashCreateObjectButton.addEventListener('click', () => {
 		objectToSave = new ObjectOfBuilding()
 		hideSecondHalfOfForm()
@@ -335,12 +336,25 @@ import {
 	volumesOfCashSaveButton.addEventListener('click', () => {
 		console.log(objectToSave)
 		localStorage.setItem(objectToSave.key, JSON.stringify(objectToSave))
+		objectsArr = loadObjects()
+		clearSelect(objectsPageSelect)
+		showLoadedData(objectsArr, objectsPageSelect)
+		disableInputs(formInputs)
 	})
-	
-	
+
+
 	deleteObjectButton.addEventListener('click', () => {
 		localStorage.removeItem(chosenObj.key)
-		window.location.reload()
+		//window.location.reload()
+		objectsArr = loadObjects()
+		clearSelect(objectsPageSelect)
+		showLoadedData(objectsArr, objectsPageSelect)
+		disableInputs(formInputs)
+		if (objectsArr.length == 0) {
+			hideUselessButtons()
+			makeInputsAble(formInputs)
+			objectToSave = new ObjectOfBuilding()
+		}
 	})
 
 

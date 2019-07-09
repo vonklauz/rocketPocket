@@ -41,19 +41,20 @@ export function showLoadedData(loadedObjectsArray, $objectSelect) {
 }
 
 
-function showVariants(chosenObject, $variantSelect) {
+export function showVariants(chosenObject, $variantSelect) {
 	let option;
-
-	if (chosenObject.variantsOfFinancing.length > 0) {
+	let keys = Object.keys(chosenObject.variantsOfFinancing)
+	if (keys.length > 0) {
+		
 		option = document.createElement('option')
 		option.value = null
 		option.textContent = "Выберите вариант финансирования"
 		$variantSelect.appendChild(option)
 
-		for (let i = 0; i < chosenObject.variantsOfFinancing.length; i++) {
+		for (let i = 0; i < keys.length; i++) {
 			option = document.createElement('option')
-			option.value = i
-			option.textContent = 'Вариант финансирования' + (i + 1)
+			option.value = keys[i]
+			option.textContent = 'Вариант финансирования ' + (i + 1)
 			$variantSelect.appendChild(option)
 		}
 	} else {
@@ -61,6 +62,7 @@ function showVariants(chosenObject, $variantSelect) {
 		option.textContent = "У данного объекта пока нет вариантов финансирования."
 		$variantSelect.appendChild(option)
 	}
+	return chosenObject.variantsOfFinancing
 }
 
 

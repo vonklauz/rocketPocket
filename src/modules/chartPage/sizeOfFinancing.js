@@ -3,7 +3,7 @@ import {
 	VariantOfFinancing
 } from '../commonFiles/Classes'
 
-(function () {
+export function turnOnForm(chosenObj) {
 	const form = document.querySelector('.app__main__form')
 	//Активные поля ввода для источников финансирования, без общей суммы и неактивных для пользовательского ввода полей
 	const activeInputs = document.getElementsByClassName('sourceOfResource')
@@ -16,11 +16,13 @@ import {
 	//Блок, появляющийся при недостаточной общей сумме финансирования
 	const errorSpan = document.getElementById('errorSpan')
 	//Кнопка для отображения графика
-	const volumesOfCashChartButton = document.getElementById('volumesOfCashChartButton')
+	const volumesOfCashChartButton = document.getElementById('chartPageFormChartButton')
 	//Кнопка сохранить
-	const saveButton = document.getElementById('volumesOfCashSaveButton')
+	const saveButton = document.getElementById('chartPageFormSaveButton')
 	//Поле с числом дефицита финансирования
 	const deficiteSum = form.deficiteSum
+	//Обёртка графика-пончика
+	const chartDiv = document.getElementById('chartDiv')
 	//Ссылка на страницу объёма финансирования
 	const volumePageLink = document.getElementById('volumePageLink')
 	//Число общей суммы финансирования
@@ -41,23 +43,6 @@ import {
 		myDoughnutChart
 
 
-	totalValueInput.addEventListener('blur', () => {
-		totalValue = +(totalValueInput.value.replace(/ /g, ""))
-		onePercent = totalValue / 100
-		collectInputValues()
-		isOverflow = countDeficite()
-		isLessThanTotalValue()
-		for (let i = 0; i < activeInputs.length; i++) {
-			if (!totalValueInput.value) {
-				activeInputs[i].disabled = true
-			} else {
-				activeInputs[i].disabled = false
-				countPercents(activeInputs[i])
-			}
-		}
-	})
-
-
 	//Перебор инпутов источников финансирования и навешивание на каждый обработчик с логикой
 	for (let i = 0; i < activeInputs.length; i++) {
 		activeInputs[i].addEventListener('blur', () => {
@@ -67,6 +52,7 @@ import {
 			collectInputValues()
 			isOverflow = countDeficite()
 			isLessThanTotalValue()
+			activeInputs[i].disabled = false
 		})
 	}
 
@@ -76,27 +62,17 @@ import {
 		collectInputValues()
 		isOverflow = countDeficite()
 		if (!isOverflow) {
-			if (!localStorage['variant' + localStorage.length]) {
-				localStorage.setItem('variant' + localStorage.length, JSON.stringify(new VariantOfFinancing(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + localStorage.length))))
-				alert('Объект успешно сохранён.')
-			} else if (localStorage['variant' + localStorage.length]) {
-				let n = localStorage.length
-				while (true) {
-					if (!localStorage['variant' + n]) {
-						localStorage.setItem('variant' + n, JSON.stringify(new ObjectOfBuilding(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + n))))
-						alert('Объект успешно сохранён.')
-						break
-					}
-					n++
-				}
-			} else {
-				alert('Невозможно сохранить объект: превышен общий объём финансирования.')
-			}
+			saveVariant(chosenObj)
+		} else {
+			alert('Невозможно сохранить объект: превышен общий объём финансирования.')
 		}
+
 	})
 
 
-	volumePageLink.addEventListener('click', () => {
+
+
+	/*volumePageLink.addEventListener('click', () => {
 		totalValue = +(totalValueInput.value.replace(/ /g, ""))
 		if (totalValue) {
 			onePercent = totalValue / 100
@@ -112,13 +88,13 @@ import {
 				}
 			}
 		}
-	})
+	})*/
 
 
 	volumesOfCashChartButton.addEventListener('click', (event) => {
-		event.preventDefault()
-		collectInputValues()
-		isOverflow = countDeficite()
+		event.preventDefault();
+		collectInputValues();
+		isOverflow = countDeficite();
 		if (!isOverflow) {
 			chartDiv.innerHTML = ""
 			chartDiv.innerHTML = '<canvas id="volumePageChart"></canvas>'
@@ -218,4 +194,44 @@ import {
 			errorSpan.classList.add('hide')
 		}
 	}
-}())
+
+
+	function saveVariant(chosenObj) {
+
+		let n = Object.keys(chosenObj.variantsOfFinancing).length
+		console.log(n, chosenObj.variantsOfFinancing)
+		while (true) {
+			if (chosenObj.variantsOfFinancing['variant' + n]) {
+				n++
+			} else {
+				chosenObj.variantsOfFinancing['variant' + n] = new VariantOfFinancing(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + n))
+				break
+
+			}
+			/*if (!localStorage['variant' + localStorage.length]) {
+					localStorage.setItem('variant' + localStorage.length, JSON.stringify(new VariantOfFinancing(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + localStorage.length))))
+					alert('Объект успешно сохранён.')
+				} else if (localStorage['variant' + localStorage.length]) {
+					let n = localStorage.length
+					while (true) {
+						if (!localStorage['variant' + n]) {
+							localStorage.setItem('variant' + n, JSON.stringify(new ObjectOfBuilding(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, ('variant' + n))))
+							alert('Объект успешно сохранён.')
+							break
+						}
+						n++
+					}
+				} */
+		}
+		localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
+		console.log(n, chosenObj.variantsOfFinancing)
+	}
+}
+
+
+
+export function turnOffForm(inputsArr) {
+	for (let i = 0; i < inputsArr.length; i++) {
+		inputsArr[i].disabled = true
+	}
+}

@@ -1,4 +1,4 @@
-export function createRevenueChart(chosenVar) {
+export function createRevenueChart(chosenObj,chosenVar) {
 	removeChart(revenueChartWrapper)
 	revenueChartWrapper.innerHTML = '<canvas id="chartPageRevenueChart"></canvas>'
 	let chartPageRevenueChart = document.getElementById('chartPageRevenueChart')
@@ -32,11 +32,11 @@ export function createRevenueChart(chosenVar) {
 			}
 		}
 	})
-	localStorage.setItem(chosenVar.key, JSON.stringify(chosenVar))
+	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 }
 
 
-export function createChart(chosenVar) {
+export function createChart(chosenObj,chosenVar) {
 	removeChart(chartWrapper)
 	chartWrapper.innerHTML = '<canvas id="chartPageChart"></canvas>'
 	let chartPageChart = document.getElementById('chartPageChart')
@@ -115,7 +115,7 @@ export function createChart(chosenVar) {
 		}
 	})
 	chosenVar.chart = true
-	localStorage.setItem(chosenVar.key, JSON.stringify(chosenVar))
+	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 }
 
 

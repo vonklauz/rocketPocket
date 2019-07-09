@@ -32,28 +32,28 @@
 				<div class="object__passport__col__wrapper ">
 					<div class="object__passport__col large_col">
 						<div class="label_input_wrapper">
-							<label for="" class="object__passport__label">Название объекта*</label>
+							<label for="" class="object__passport__label">Название объекта<span class="red">*</span></label>
 							<input class="large_input" type="text" id="objectName" maxlength="60" placeholder="5 - 60 символов">
 						</div>
 						<div class="label_input_wrapper">
-							<label for="" class="object__passport__label">Сметная стоимость*</label><input class="small_input number_input" type="text" id="objectEstimate">
+							<label for="" class="object__passport__label">Сметная стоимость<span class="red">*</span></label><input class="small_input number_input" type="text" id="objectEstimate">
 						</div>
 						<div class="label_input_wrapper">
-							<label for="" class="object__passport__label">Объём м<sup>2</sup> к реализации*</label><input class="small_input number_input" type="text" id="objectArea">
+							<label for="" class="object__passport__label">Объём м<sup>2</sup> к реализации<span class="red">*</span></label><input class="small_input number_input" type="text" id="objectArea">
 						</div>
 						<div class="label_input_wrapper">
-								<label for="passportUl" id="passportUlLabel">В том числе (м<sup>2</sup>):</label>
-								<ul class="passport__ul" id="passportUl">
-									<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input micro_input" id="flatsSquare"></li>
-									<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesSquare"></li>
-									<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeSquare"></li>
-									<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesSquare"></li>
-									<li><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingSquare"></li>
-								</ul>
+							<label for="passportUl" id="passportUlLabel">В том числе (м<sup>2</sup>) <span class="red">*</span>:</label>
+							<ul class="passport__ul" id="passportUl">
+								<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input micro_input" id="flatsSquare"></li>
+								<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesSquare"></li>
+								<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeSquare"></li>
+								<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesSquare"></li>
+								<li><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingSquare"></li>
+							</ul>
 						</div>
 					</div>
 					<div class="object__passport__col small_col">
-						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта (необязательно). Максимальная длина: 800 символов."></textarea>
+						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта. Максимальная длина: 800 символов."></textarea>
 					</div>
 				</div>
 				<button class="main__form__button" id="objectPassportNextStepButton">Далее</button>
@@ -96,12 +96,19 @@
 					<button class="main__form__button" id="volumesOfCashSaveButton" type="submit">Сохранить новый объект</button>
 					<button class="main__form__button" id="deleteObjectButton">Удалить объект</button>
 				</div>
-
 			</form>
-			<!--<form action="" class="app__main__form" id="volumesOfCashForm">
+		</div>
+		<div id="chartPage" class="hide">
+			<h1 class="app__h1">График и источники финансирования проекта (план)</h1>
+			<select name="" id="chartPageSelectObject" class="app_select">
+			</select>
+			<select name="" id="chartPageSelectVariant" class="app_select">
+			</select>
+			<button class="main__form__button" id="chartPageCreateVariantButton" type="reset">Задать новый вариант</button>
+			<form action="" class="app__main__form" id="volumesOfCashForm">
 				<div class="main__form__input_wrapper light_blue column_wrapper" id="totalValueWrapper">
 					Общий объём финансирования
-					<input type="text" class="input_wrapper__input totalValueInput light_blue " id="totalValueInput" value="" name="totalValue">
+					<input type="text" class="input_wrapper__input totalValueInput light_blue " id="totalValueInput" value="" name="totalValue" disabled>
 					<p id="errorSpan" class="block_error hide">Превышен общий объём финансирования</p>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
@@ -135,19 +142,14 @@
 					<span class="input_wrapper__span block_error">% от общего объёма</span>
 				</div>
 				<div class="app__main__buttons_wrapper">
-					<button class="main__form__button" id="volumesOfCashChartButton">График</button>
-					<button class="main__form__button" id="volumesOfCashSaveButton">Сохранить</button>
+					<button class="main__form__button" id="chartPageFormChartButton">График</button>
+					<button class="main__form__button" id="chartPageFormSaveButton">Сохранить</button>
 				</div>
 			</form>
 			<div class="main__chart__wrapper" id="chartDiv">
 				<h2 class="block_error" id="deficiteErrorH2"></h2>
 				<canvas id="volumePageChart"></canvas>
-			</div>-->
-		</div>
-		<div id="chartPage" class="hide">
-			<h1 class="app__h1">График и источники финансирования проекта (план)</h1>
-			<select name="" id="chartPageSelect">
-			</select>
+			</div>
 			<div class="main__chartPage__wrapper">
 				<aside class="chartPage__wrapper__left_block">
 					<p class="chosen_var">Вариант финансирования не выбран</p>
@@ -376,10 +378,7 @@
 			messagingSenderId: "426651486308"
 		};
 		firebase.initializeApp(config);
-
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-</body>
-
-</html>
+</body></html>

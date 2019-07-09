@@ -35,7 +35,7 @@ export class ObjectOfBuilding {
 					parkingPrice: '',
 				}
 			},
-			this.variantsOfFinancing = [],
+			this.variantsOfFinancing = {},
 			this.key = 'objectOfBuilding' + Math.random()
 	}
 }
