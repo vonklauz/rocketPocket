@@ -16,9 +16,6 @@ export function chooseVariant($select, loadedVariantsArray) {
 
 	//Выбранный вариант финансирования попадёт в эту переменную
 	let chosenVar;
-	//Элементы p на всех страницах, где отображается название выбранного варианта
-	//const showedChosenVars = document.getElementsByClassName('chosen_var')
-	//Форма на первой странице
 	const form = document.querySelector('.app__main__form')
 
 	chosenVar = loadedVariantsArray[$select.value]
@@ -36,16 +33,41 @@ export function chooseVariant($select, loadedVariantsArray) {
 
 		//Отображение значений по умолчанию выбранного варианта на первой странице
 		form.totalValue.value = String(chosenVar.totalValue.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.ownCash.value = String(chosenVar.ownCash.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.bankCredit.value = String(chosenVar.bankCredit.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.escrowResource.value = String(chosenVar.escrowResource.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.investorA.value = String(chosenVar.investorA.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.investorB.value = String(chosenVar.investorB.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-		form.deficiteSum.value = String(chosenVar.deficite).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-	} else {
-		showedChosenVars[0].textContent = 'Вариант финансирования не выбран '
-		showedChosenVars[1].textContent = 'Вариант финансирования не выбран '
-	}
+		countPercents(form.totalValue)
 
-	return chosenVar
+		form.ownCash.value = String(chosenVar.ownCash.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.ownCash)
+
+		form.bankCredit.value = String(chosenVar.bankCredit.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.bankCredit)
+
+		form.escrowResource.value = String(chosenVar.escrowResource.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.escrowResource)
+
+		form.investorA.value = String(chosenVar.investorA.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.investorA)
+
+		form.investorB.value = String(chosenVar.investorB.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.investorB)
+
+		form.deficiteSum.value = String(chosenVar.deficite).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		countPercents(form.deficiteSum)
+
+
+		return chosenVar
+	}
+	return false
+}
+
+
+export function countPercents(input) {
+	let totalVal = Number(document.getElementById('totalValueInput').value.replace(/ /g, ""))
+	let onePercent = totalVal / 100
+	let percentOfTotal = Number(input.value.replace(/ /g, "")) / onePercent
+	if (percentOfTotal > 0) {
+		input.nextElementSibling.textContent = percentOfTotal.toFixed(2) + "% от общего объёма"
+	}
+	else{
+		input.nextElementSibling.textContent = "% от общего объёма"
+	}
 }

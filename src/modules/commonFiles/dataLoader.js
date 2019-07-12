@@ -20,7 +20,7 @@ export function showLoadedData(loadedObjectsArray, $objectSelect) {
 	if (loadedObjectsArray.length > 0) {
 		option = document.createElement('option')
 		option.value = null
-		option.textContent = "Выберите объект строительства"
+		option.textContent = "Выберите объект"
 		$objectSelect.appendChild(option)
 		loadedObjectsArray.sort((a, b) => {
 			return (a.name.toLowerCase) - (b.name.toLowerCase)
@@ -34,7 +34,7 @@ export function showLoadedData(loadedObjectsArray, $objectSelect) {
 
 	} else {
 		option = document.createElement('option')
-		option.textContent = "В базе данных отсутствуют сохранённые объекты."
+		option.textContent = "Нет сохранённых объектов."
 		$objectSelect.appendChild(option)
 	}
 	return loadedObjectsArray
@@ -48,7 +48,7 @@ export function showVariants(chosenObject, $variantSelect) {
 		
 		option = document.createElement('option')
 		option.value = null
-		option.textContent = "Выберите вариант финансирования"
+		option.textContent = "Варианты финансирования"
 		$variantSelect.appendChild(option)
 
 		for (let i = 0; i < keys.length; i++) {
@@ -59,7 +59,7 @@ export function showVariants(chosenObject, $variantSelect) {
 		}
 	} else {
 		option = document.createElement('option')
-		option.textContent = "У данного объекта пока нет вариантов финансирования."
+		option.textContent = "Нет вариантов финансирования."
 		$variantSelect.appendChild(option)
 	}
 	return chosenObject.variantsOfFinancing

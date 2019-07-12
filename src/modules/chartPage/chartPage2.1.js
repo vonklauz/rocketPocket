@@ -1,6 +1,10 @@
+import Chart from 'chart.js'
+
+
 import {
 	VariantOfFinancing
 } from '../commonFiles/Classes'
+
 
 import {
 	loadObjects,
@@ -9,15 +13,34 @@ import {
 	clearSelect
 } from '../commonFiles/dataLoader'
 
-import {
-	chooseObject,
-	chooseVariant
-} from './dataListener/chooseVariant'
 
 import {
-	turnOnForm,
-	turnOffForm
-} from './sizeOfFinancing'
+	chooseObject,
+	chooseVariant,
+	countPercents
+} from './dataListener/chooseVariant'
+
+
+import {
+	hideElement,
+	hideAll,
+	showElement,
+	turnOnInputs,
+	turnOffInputs,
+	clearInputs
+} from './form/formUsageSteps'
+
+
+import {
+	saveVariant
+} from './form/saveVariant'
+
+
+import {
+	validInputs,
+	isLessThanTotalValue,
+	countFulfilledInputs
+} from './form/validation'
 
 
 import {
@@ -30,15 +53,10 @@ import {
 	deleteVariant,
 	createTotalValueLine
 } from './chartOptions/chartOptions'
-/*showOptions(chosenVar)
-addCashToChart(chosenVar, source, volume, month, year, operation, periodsArr)
-function setBuildingPeriod(startMonth, startYear, endMonth, endYear) {return periodsArray}
-function setRepaymentPeriod(objectPeriodsArray, endMonth, endYear) {return repaymentPeriodsArray}
-function countCurrentWastedSum(chosenVar)
-function saveChangesInChosenVar(chosenVar)*/
 
 
 import {
+	createDoughnutChart,
 	createRevenueChart,
 	createChart,
 	removeChart,
@@ -51,14 +69,17 @@ import {
 (function () {
 	//Ссылка на страницу с графиками
 	const chartPageLink = document.getElementById('chartPageLink')
-
+	const form = document.querySelector('.app__main__form')
 	const chartPageSelectObject = document.getElementById('chartPageSelectObject')
 	const chartPageSelectVariant = document.getElementById('chartPageSelectVariant')
 	const chartPageCreateVariantButton = document.getElementById('chartPageCreateVariantButton')
 	const estimateInput = document.getElementById('totalValueInput')
 	const activeInputs = document.getElementsByClassName('sourceOfResource')
+	const chartPageFormSaveButton = document.getElementById('chartPageFormSaveButton')
+	const deleteVariantButton = document.getElementById('deleteVariantButton')
+	const doughNutChartWrapper = document.getElementById('doughNutChartWrapper')
+	
 	const chartWrapper = document.getElementById('chartWrapper')
-	const deleteVariantButton = document.getElementById('deleteVariant')
 	const setBuildingPeriodButton = document.getElementById('setBuildingPeriodButton')
 	const enterCashButton = document.getElementById('enterCashButton')
 	const removeCashButton = document.getElementById('removeCashButton')
@@ -73,43 +94,85 @@ import {
 	let objectsArr;
 	let chosenVar = false
 	let chosenObj = false
+	let isOverflow;
 
 
 	window.addEventListener('load', () => {
 		objectsArr = loadObjects()
 		showLoadedData(objectsArr, chartPageSelectObject)
+		turnOffInputs(activeInputs)
 	})
-
-
+	
+	
 	chartPageSelectObject.addEventListener('change', () => {
 		chosenObj = chooseObject(chartPageSelectObject, objectsArr)
 		clearSelect(chartPageSelectVariant)
 		loadedVariantsArray = showVariants(chosenObj, chartPageSelectVariant)
-		estimateInput.value = String(chosenObj.estimate.revenueExcludingFinRes).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		estimateInput.value = String(chosenObj.estimate.ownCost).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
 	})
+	
+/*
+<h1 class="app__h1 hide">График и источники финансирования проекта (план)</h1>
+<div class="main__chartPage__wrapper hide">
 
+*/
 	chartPageSelectVariant.addEventListener('change', () => {
 		chosenVar = chooseVariant(chartPageSelectVariant, loadedVariantsArray)
-		turnOffForm(activeInputs)
-		cleanTab(tab)
-		if (chosenVar.chart == true) {
-			createChart(chosenObj, chosenVar)
-			createRevenueChart(chosenObj, chosenVar)
+		turnOffInputs(activeInputs)
+		showElement(deleteVariantButton)
+		hideElement(chartPageFormSaveButton)
+		if (chosenVar) {
+			createDoughnutChart(chosenVar)
 			cleanTab(tab)
-			calculateValuesForCostsChart(chosenVar)
-			createCostsChart(chosenVar)
-			//resetChosenVarValues(chosenVar)
-		} else {
-			removeChart(chartWrapper)
-			removeChart(revenueChartWrapper)
+			if (chosenVar.chart == true) {
+				createChart(chosenObj, chosenVar)
+				createRevenueChart(chosenObj, chosenVar)
+				//calculateValuesForCostsChart(chosenVar)
+				//createCostsChart(chosenVar)
+				//resetChosenVarValues(chosenVar)
+			} else {
+				removeChart(chartWrapper)
+				removeChart(revenueChartWrapper)
+			}
+		}
+		else{
+			clearInputs(activeInputs)
 		}
 	})
 
+	
 	chartPageCreateVariantButton.addEventListener('click', () => {
-		turnOnForm(chosenObj)
+		turnOnInputs(activeInputs)
+		clearInputs(activeInputs)
+		removeChart(doughNutChartWrapper)
+		hideElement(deleteVariantButton)
+		hideAll(document.querySelectorAll('.chart_page__rest_part'))
+		showElement(chartPageFormSaveButton)
 	})
 	
 	
+	for (let i = 0; i < activeInputs.length; i++) {
+		activeInputs[i].addEventListener('blur', () => {
+			countPercents(activeInputs[i])
+			isOverflow = validInputs(activeInputs, chosenObj.estimate.ownCost)
+			isLessThanTotalValue(isOverflow)
+		})
+	}
+	
+	
+	chartPageFormSaveButton.addEventListener('click', () => {
+		saveVariant(chosenObj)
+		/*clearSelect(chartPageSelectVariant)
+		loadedVariantsArray = showVariants(chosenObj, chartPageSelectVariant)
+		turnOffInputs(activeInputs)*/
+	})
+	
+	
+	deleteVariantButton.addEventListener('click', () => {
+		deleteVariant(chosenObj, chosenVar)
+	})
+	
+
 	setBuildingPeriodButton.addEventListener('click', () => {
 		let startMonth = +(document.getElementById('StartOfPeriodMonth').value);
 		let startYear = +(document.getElementById('StartOfPeriodYear').value);
@@ -142,15 +205,10 @@ import {
 	})*/
 
 
-	deleteVariantButton.addEventListener('click', () => {
-		deleteVariant(chosenObj, chosenVar)
-	})
-
-
 	enterCashButton.addEventListener('click', () => {
 		addCashToChart(chosenVar, document.getElementById('sourceOfIncome').value, document.getElementById('sumOfIncome').value, document.getElementById('monthOfIncome').value, document.getElementById('yearOfIncome').value, '+', chosenVar.periods)
 		countCurrentWastedSum(chosenVar)
-		saveChangesInChosenVar(chosenObj,chosenVar)
+		saveChangesInChosenVar(chosenObj, chosenVar)
 		createChart(chosenObj, chosenVar)
 	})
 
@@ -158,21 +216,21 @@ import {
 	removeCashButton.addEventListener('click', () => {
 		addCashToChart(chosenVar, document.getElementById('sourceOfIncome').value, document.getElementById('sumOfIncome').value, document.getElementById('monthOfIncome').value, document.getElementById('yearOfIncome').value, '-', chosenVar.periods)
 		countCurrentWastedSum(chosenVar)
-		saveChangesInChosenVar(chosenObj,chosenVar)
+		saveChangesInChosenVar(chosenObj, chosenVar)
 		createChart(chosenObj, chosenVar)
 	})
-	
-	
-	enterRevenueCashButton.addEventListener('click',() =>{
+
+
+	enterRevenueCashButton.addEventListener('click', () => {
 		addCashToChart(chosenVar, 'revenue', document.getElementById('sumOfRevenue').value, document.getElementById('monthOfRevenue').value, document.getElementById('yearOfRevenue').value, '+', chosenVar.repaymentPeriods)
-		saveChangesInChosenVar(chosenObj,chosenVar)
+		saveChangesInChosenVar(chosenObj, chosenVar)
 		createRevenueChart(chosenObj, chosenVar)
 	})
-	
-	
-	removeRevenueCashButton.addEventListener('click',() =>{
+
+
+	removeRevenueCashButton.addEventListener('click', () => {
 		addCashToChart(chosenVar, 'revenue', document.getElementById('sumOfRevenue').value, document.getElementById('monthOfRevenue').value, document.getElementById('yearOfRevenue').value, '-', chosenVar.repaymentPeriods)
-		saveChangesInChosenVar(chosenObj,chosenVar)
+		saveChangesInChosenVar(chosenObj, chosenVar)
 		createRevenueChart(chosenObj, chosenVar)
 	})
 

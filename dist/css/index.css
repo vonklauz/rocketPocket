@@ -16,9 +16,9 @@ textarea {
 	outline: none;
 }
 
-input:disabled {
+/*input:disabled {
 	background-color: #fff;
-}
+}*/
 
 /*END Common styles*/
 
@@ -190,7 +190,8 @@ main {
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
-	border-bottom-color: rgba(34, 193, 219, .5);
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, .5);
+	box-shadow: 0px 1px 10px 1px rgba(34, 193, 219, .5);
 }
 
 .object__passport__textarea {
@@ -376,21 +377,11 @@ main {
 	color: gray;
 }
 
-.app__main__buttons_wrapper {
-	width: 24.75%;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-}
-
 .main__form__button {
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
-	background: white;
+	background: #fff;
 	cursor: pointer;
 	border: none;
 	letter-spacing: 1px;
@@ -399,23 +390,21 @@ main {
 	width: 20%;
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
-	background: -webkit-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
-	background: -o-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
-	background: linear-gradient(195deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
 }
 
 #volumesOfCashCreateObjectButton {
 	margin-left: 2%;
 }
 
-#deleteObjectButton {
+#deleteObjectButton,
+#deleteVariantButton{
 	background: -webkit-linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
 	background: -o-linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
 	background: linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
-	margin-left: 2%;
 }
 
-#deleteObjectButton:hover {
+#deleteObjectButton:hover,
+#deleteVariantButton:hover{
 	-webkit-box-shadow: 0px 1px 10px 1px linear-gradient(45deg, rgba(200, 0, 0, 0.7), rgba(173, 0, 0, 0.7));
 	box-shadow: 0px 1px 10px 1px rgba(173, 0, 0, 0.7);
 }
@@ -444,15 +433,16 @@ main {
 	transition: .5s;
 }
 
-#chartPageSelectVariant,
-#chartPageCreateVariantButton{
-	margin-left: 5%;
+.app__main__form__top_options{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+	justify-content: space-around;
 }
 
-#chartPageFormChartButton,
-#chartPageFormSaveButton {
-	width: 30%;
-	background: #fff;
+#chartAndSourcesH1{
+	margin-top: 4%;
 }
 
 .main__chartPage__wrapper {
@@ -469,12 +459,19 @@ main {
 
 .chartPage__wrapper__left_block {
 	width: 20%;
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
+    border-radius: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
 }
-
-.left_block__input_wrapper {
-	margin-top: 5%;
-}
-
 
 .chartPage__wrapper__right_block {
 	width: 75%;
@@ -491,7 +488,8 @@ main {
 }
 
 #deleteVariant {
-	margin-top: 5%;
+	height: 5vh;
+	width: 20%;
 	color: white;
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
 	box-shadow: 0px 1px 10px 1px rgba(193, 0, 0, 0.7);
@@ -546,6 +544,10 @@ main {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center
+}
+
+.chart_options__add_cash__wrapper{
+	margin-top: 1%;
 }
 
 .set_period__select,
@@ -802,12 +804,24 @@ footer {
 	transition: .5s;
 }
 
+.basic_style_noHover{
+	-webkit-box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, .1);
+	border-radius: 10px;
+}
+
 .red {
 	color: rgba(193, 0, 0, 0.7);
 }
 
 .light_blue {
 	color: rgb(34, 193, 219);
+}
+
+.light_blue_button{
+	background: -webkit-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
+	background: -o-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
+	background: linear-gradient(195deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
 }
 
 .dark_blue {

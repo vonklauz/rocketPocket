@@ -4,6 +4,7 @@ import {
 } from '../commonFiles/Classes'
 
 export function turnOnForm(chosenObj) {
+	const chartPageSelectVariant = document.getElementById('chartPageSelectVariant')
 	const form = document.querySelector('.app__main__form')
 	//Активные поля ввода для источников финансирования, без общей суммы и неактивных для пользовательского ввода полей
 	const activeInputs = document.getElementsByClassName('sourceOfResource')
@@ -68,8 +69,6 @@ export function turnOnForm(chosenObj) {
 		}
 
 	})
-
-
 
 
 	/*volumePageLink.addEventListener('click', () => {
@@ -224,14 +223,25 @@ export function turnOnForm(chosenObj) {
 				} */
 		}
 		localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
-		console.log(n, chosenObj.variantsOfFinancing)
+		alert('Вариант успешно сохранён.')
 	}
 }
 
+export function turnOnInputs(inputsArr) {
+	for (let i = 0; i < inputsArr.length; i++) {
+		inputsArr[i].disabled = false
+	}
+}
 
-
-export function turnOffForm(inputsArr) {
+export function turnOffInputs(inputsArr) {
 	for (let i = 0; i < inputsArr.length; i++) {
 		inputsArr[i].disabled = true
 	}
+}
+
+export function clearInputs(inputsArr) {
+	for (let i = 0; i < inputsArr.length; i++) {
+		inputsArr[i].value = ''
+	}
+	document.getElementById('volumesOfCashForm').deficiteSum.value = ''
 }

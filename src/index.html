@@ -56,7 +56,7 @@
 						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта. Максимальная длина: 800 символов."></textarea>
 					</div>
 				</div>
-				<button class="main__form__button" id="objectPassportNextStepButton">Далее</button>
+				<button class="main__form__button light_blue_button" id="objectPassportNextStepButton">Далее</button>
 				<div class="object__passport__cost_price hide">
 					<div class="label_input_wrapper centering_label ">
 						<label for="" class="object__passport__label light_blue">Себестоимость 1м<sup>2</sup> без(!) затрат на привлечение фин. ресурсов</label>
@@ -93,18 +93,21 @@
 						<label for="" class="object__passport__label green">Бюджет выручки без затрат на привлечение фин. ресурсов</label>
 						<input class="small_input number_input green" type="text" id="totalRevenue" maxlength="" placeholder="" disabled>
 					</div>
-					<button class="main__form__button" id="volumesOfCashSaveButton" type="submit">Сохранить новый объект</button>
+					<button class="main__form__button light_blue_button" id="volumesOfCashSaveButton" type="submit">Сохранить новый объект</button>
 					<button class="main__form__button" id="deleteObjectButton">Удалить объект</button>
 				</div>
 			</form>
 		</div>
 		<div id="chartPage" class="hide">
-			<h1 class="app__h1">График и источники финансирования проекта (план)</h1>
-			<select name="" id="chartPageSelectObject" class="app_select">
-			</select>
-			<select name="" id="chartPageSelectVariant" class="app_select">
-			</select>
-			<button class="main__form__button" id="chartPageCreateVariantButton" type="reset">Задать новый вариант</button>
+			<h1 class="app__h1">Объём и источники финансирования проекта (план)</h1>
+			<div class="app__main__form__top_options">
+				<select name="" id="chartPageSelectObject" class="app_select">
+				</select>
+				<select name="" id="chartPageSelectVariant" class="app_select">
+				</select>
+				<button class="main__form__button" id="chartPageCreateVariantButton" type="reset">Задать новый вариант</button>
+				<button class="main__form__button hide" id="deleteVariantButton">Удалить вариант</button>
+			</div>
 			<form action="" class="app__main__form" id="volumesOfCashForm">
 				<div class="main__form__input_wrapper light_blue column_wrapper" id="totalValueWrapper">
 					Общий объём финансирования
@@ -113,27 +116,27 @@
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
 					<div class="input_wrapper__text">Собственные средства</div>
-					<input type="text" class="input_wrapper__input row_input sourceOfResource" value="" name="ownCash">
+					<input type="text" class="input_wrapper__input row_input sourceOfResource number_input" value="" name="ownCash">
 					<span class="input_wrapper__span">% от общего объёма</span>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
 					<div class="input_wrapper__text">Кредит банка под залог</div>
-					<input type="text" class="input_wrapper__input row_input sourceOfResource" value="" name="bankCredit">
+					<input type="text" class="input_wrapper__input row_input sourceOfResource number_input" value="" name="bankCredit">
 					<span class="input_wrapper__span">% от общего объёма</span>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
 					<div class="input_wrapper__text">Кредит банка / эскроу ресурс</div>
-					<input type="text" class="input_wrapper__input row_input sourceOfResource" value="" name="escrowResource">
+					<input type="text" class="input_wrapper__input row_input sourceOfResource number_input" value="" name="escrowResource">
 					<span class="input_wrapper__span">% от общего объёма</span>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
 					<div class="input_wrapper__text">Инвестор категории "А"</div>
-					<input type="text" class="input_wrapper__input row_input sourceOfResource" value="" name="investorA">
+					<input type="text" class="input_wrapper__input row_input sourceOfResource number_input" value="" name="investorA">
 					<span class="input_wrapper__span">% от общего объёма</span>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper">
 					<div class="input_wrapper__text">Инвестор категории "В"</div>
-					<input type="text" class="input_wrapper__input row_input sourceOfResource" value="" name="investorB">
+					<input type="text" class="input_wrapper__input row_input sourceOfResource number_input" value="" name="investorB">
 					<span class="input_wrapper__span">% от общего объёма</span>
 				</div>
 				<div class="main__form__input_wrapper row_wrapper block_error">
@@ -141,18 +144,15 @@
 					<input type="text" class="input_wrapper__input row_input input_error" value="" name="deficiteSum" disabled>
 					<span class="input_wrapper__span block_error">% от общего объёма</span>
 				</div>
-				<div class="app__main__buttons_wrapper">
-					<button class="main__form__button" id="chartPageFormChartButton">График</button>
-					<button class="main__form__button" id="chartPageFormSaveButton">Сохранить</button>
-				</div>
+				<button class="main__form__button light_blue_button hide" id="chartPageFormSaveButton">Сохранить</button>
 			</form>
-			<div class="main__chart__wrapper" id="chartDiv">
+			<div class="main__chart__wrapper" id="doughNutChartWrapper">
 				<h2 class="block_error" id="deficiteErrorH2"></h2>
-				<canvas id="volumePageChart"></canvas>
+				<canvas id="doughNutChart"></canvas>
 			</div>
-			<div class="main__chartPage__wrapper">
-				<aside class="chartPage__wrapper__left_block">
-					<p class="chosen_var">Вариант финансирования не выбран</p>
+			<h1 class="app__h1 hide chart_page__rest_part" id="chartAndSourcesH1">График и источники финансирования проекта (план)</h1>
+			<div class="main__chartPage__wrapper hide chart_page__rest_part">
+				<aside class="chartPage__wrapper__left_block basic_style_noHover">
 					<div class="left_block__input_wrapper light_blue">
 						<div class="input_wrapper__chartPage_text">Общий объём финансирования</div>
 						<input type="text" disabled id="totalValueChart" class="light_blue" value="">
@@ -181,11 +181,10 @@
 						<div class="input_wrapper__chartPage_text">Дефицит ресурсов</div>
 						<input type="text" disabled id="deficiteSumChart" class="block_error" value="">
 					</div>
-					<button id="deleteVariant">Удалить вариант</button>
 				</aside>
 				<div class="chartPage__wrapper__right_block" id="chartWrapper"></div>
 			</div>
-			<div class="chartPage__wrapper__chart_options hide">
+			<div class="chartPage__wrapper__chart_options hide chart_page__rest_part">
 				<div class="chart_options__set_period__wrapper">
 					Начало строительства:
 					<div class="set_period__wrapper_content">
@@ -265,7 +264,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="chart_page__table__wrapper hide">
+			<div class="chart_page__table__wrapper hide chart_page__rest_part">
 				<h2 id="chartPageTableH2">Определение стоимости привлечения ресурсов</h2>
 				<table id="chartPageTable">
 					<tr>
@@ -289,7 +288,7 @@
 				</table>
 				<button id="CountPercentPayments">Рассчитать</button>
 			</div>
-			<div class="chart_page__repayment_wrapper">
+			<div class="chart_page__repayment_wrapper hide chart_page__rest_part">
 				<h2>Продажи / формирование эскроу ресурса</h2>
 				<div class="main__chartPage__wrapper">
 					<aside class="chartPage__wrapper__left_block revenue_chart__aside">
@@ -327,7 +326,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="chart_page__costs_wrapper">
+			<div class="chart_page__costs_wrapper hide chart_page__rest_part">
 				<h2>Бюджет выручки</h2>
 				<div class="main__chartPage__wrapper">
 					<aside class="chartPage__wrapper__left_block costsAndRevenueChartWrapper_aside">
@@ -378,7 +377,10 @@
 			messagingSenderId: "426651486308"
 		};
 		firebase.initializeApp(config);
+
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-</body></html>
+</body>
+
+</html>

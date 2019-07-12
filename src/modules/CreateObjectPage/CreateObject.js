@@ -162,11 +162,18 @@ import {
 		secondHalfOfForm.classList.remove('hide')
 		objectPassportNextStepButton.classList.add('hide')
 	}
-
-
+	
+	
 	function hideSecondHalfOfForm() {
 		secondHalfOfForm.classList.add('hide')
 		objectPassportNextStepButton.classList.remove('hide')
+	}
+	
+	
+	function showAllInputs(){
+		for(let i = 0; i < formInputs.length; i++){
+			formInputs[i].parentNode.classList.remove('hide')
+		}
 	}
 
 
@@ -249,6 +256,10 @@ import {
 			document.getElementById(inputType).value = prepareValueToDisplay(chosenObj[estateType][inputType])
 			document.getElementById(inputType).parentNode.classList.remove('hide')
 		}
+		else{
+			document.getElementById(inputType).value = ''
+			document.getElementById(inputType).parentNode.classList.add('hide')
+		}
 	}
 
 
@@ -304,6 +315,7 @@ import {
 
 	volumesOfCashCreateObjectButton.addEventListener('click', () => {
 		objectToSave = new ObjectOfBuilding()
+		showAllInputs()
 		hideSecondHalfOfForm()
 		makeInputsAble(formInputs)
 		clearInputsValues(formInputs)
@@ -333,27 +345,35 @@ import {
 		countPrice()
 	})
 
-	volumesOfCashSaveButton.addEventListener('click', () => {
-		console.log(objectToSave)
+	volumesOfCashSaveButton.addEventListener('click', (event) => {
+		event.preventDefault()
 		localStorage.setItem(objectToSave.key, JSON.stringify(objectToSave))
 		objectsArr = loadObjects()
 		clearSelect(objectsPageSelect)
 		showLoadedData(objectsArr, objectsPageSelect)
 		disableInputs(formInputs)
+		alert('Объект успешно сохранён.')
 	})
 
 
-	deleteObjectButton.addEventListener('click', () => {
-		localStorage.removeItem(chosenObj.key)
-		//window.location.reload()
-		objectsArr = loadObjects()
-		clearSelect(objectsPageSelect)
-		showLoadedData(objectsArr, objectsPageSelect)
-		disableInputs(formInputs)
-		if (objectsArr.length == 0) {
-			hideUselessButtons()
-			makeInputsAble(formInputs)
-			objectToSave = new ObjectOfBuilding()
+	deleteObjectButton.addEventListener('click', (event) => {
+		event.preventDefault()
+		if (chosenObj) {
+			localStorage.removeItem(chosenObj.key)
+			clearInputsValues(formInputs)
+			hideSecondHalfOfForm()
+			objectsArr = loadObjects()
+			clearSelect(objectsPageSelect)
+			showLoadedData(objectsArr, objectsPageSelect)
+			disableInputs(formInputs)
+			if (objectsArr.length == 0) {
+				hideUselessButtons()
+				makeInputsAble(formInputs)
+				objectToSave = new ObjectOfBuilding()
+			}
+		}
+		else{
+			alert('Не выбран объект к удалению.')
 		}
 	})
 

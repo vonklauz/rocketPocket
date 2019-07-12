@@ -1,13 +1,18 @@
 //Функция отображения опций под графиком
 export function showOptions(chosenVar) {
 	//Блок с опциями под графиком
+	const chartAndSourcesH1 = document.getElementById('chartAndSourcesH1')
+	const chartWrapper = document.querySelector('.main__chartPage__wrapper')
 	const chartPageOptions = document.querySelector('.chartPage__wrapper__chart_options')
 	const setPeriodOption = document.querySelector('.chart_options__set_period__wrapper')
 	const addMoneyOption = document.querySelector('.chart_options__add_cash__wrapper')
 	const chartPageTable = document.querySelector('.chart_page__table__wrapper')
 
+	
+	chartAndSourcesH1.classList.remove('hide')
 	chartPageOptions.classList.remove('hide')
 	if (chosenVar.periods.length > 0) {
+		chartWrapper.classList.remove('hide')
 		setPeriodOption.classList.add('hide')
 		addMoneyOption.classList.remove('hide')
 		chartPageTable.classList.remove('hide')
@@ -15,6 +20,7 @@ export function showOptions(chosenVar) {
 		setPeriodOption.classList.remove('hide')
 		addMoneyOption.classList.add('hide')
 		chartPageTable.classList.add('hide')
+		chartWrapper.classList.add('hide')
 	}
 }
 

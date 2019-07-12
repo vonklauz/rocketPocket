@@ -1,4 +1,49 @@
-export function createRevenueChart(chosenObj,chosenVar) {
+export function createDoughnutChart(chosenVar) {
+	removeChart(doughNutChartWrapper)
+	doughNutChartWrapper.innerHTML = '<canvas id="doughNutChart"></canvas>'
+	let doughNutChart = document.getElementById('doughNutChart');
+	let myDoughnutChart = new Chart(doughNutChart, {
+		type: 'doughnut',
+		data: {
+			labels: ['Собственные ср-ва', 'Кредит банка под залог', 'Кредит банка/эскроу ресурс', 'Инв-р кат. А', 'Инв-р кат. В', 'Дефицит ресурсов'],
+			datasets: [{
+				label: '# of Votes',
+				data: [chosenVar.ownCash.defaultBalance, chosenVar.bankCredit.defaultBalance, chosenVar.escrowResource.defaultBalance, chosenVar.investorA.defaultBalance, chosenVar.investorB.defaultBalance, chosenVar.deficite],
+				backgroundColor: [
+                'rgba(255, 99, 132, 0.1)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(125, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+				'red'
+            ],
+				borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+				'red'
+            ],
+				borderWidth: 1
+        }]
+		},
+		options: {
+			responsive: true,
+			legend: {
+				position: 'top',
+			},
+			animation: {
+				animateScale: true,
+				animateRotate: true
+			}
+		}
+	})
+}
+
+
+
+export function createRevenueChart(chosenObj, chosenVar) {
 	removeChart(revenueChartWrapper)
 	revenueChartWrapper.innerHTML = '<canvas id="chartPageRevenueChart"></canvas>'
 	let chartPageRevenueChart = document.getElementById('chartPageRevenueChart')
@@ -36,7 +81,7 @@ export function createRevenueChart(chosenObj,chosenVar) {
 }
 
 
-export function createChart(chosenObj,chosenVar) {
+export function createChart(chosenObj, chosenVar) {
 	removeChart(chartWrapper)
 	chartWrapper.innerHTML = '<canvas id="chartPageChart"></canvas>'
 	let chartPageChart = document.getElementById('chartPageChart')
@@ -221,9 +266,9 @@ export function resetChosenVarValues(chosenVar) {
 
 export function calculateValuesForCostsChart(chosenVar) {
 	let sourcesArr = [chosenVar.totalValue.changesArr, chosenVar.ownCash.changesArr, chosenVar.bankCredit.changesArr, chosenVar.escrowResource.changesArr, chosenVar.investorA.changesArr, chosenVar.investorB.changesArr, chosenVar.currentDepositedSumChangesArr];
-	
+
 	for (let i = 0; i < sourcesArr.length; i++) {
-		for(let n = chosenVar.periods.length; n < chosenVar.repaymentPeriods.length; n ++) {
+		for (let n = chosenVar.periods.length; n < chosenVar.repaymentPeriods.length; n++) {
 			sourcesArr[i][n] = sourcesArr[i][chosenVar.periods.length - 1]
 		}
 	}
