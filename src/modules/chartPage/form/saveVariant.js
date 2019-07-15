@@ -37,5 +37,6 @@ export function saveVariant(chosenObj) {
 	
 	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 	alert('Вариант успешно сохранён.')
+	return ('variant' + n)
 
 }

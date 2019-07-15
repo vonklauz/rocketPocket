@@ -1,14 +1,19 @@
+import {
+	countPercents
+} from '../dataListener/chooseVariant'
+
 //Возвращает булево значение, превышен ли общий объём финансирования
 export function validInputs(inputsArr, totalValue) {
 	let deficite = 0;
-	for(let i = 0; i < inputsArr.length; i++) {
-		if(inputsArr[i].value) {
+	for (let i = 0; i < inputsArr.length; i++) {
+		if (inputsArr[i].value) {
 			deficite += Number(inputsArr[i].value.replace(/ /g, ""))
 		}
 	}
 	let isOverflow = totalValue >= deficite ? false : true
 	deficite = totalValue - deficite
 	document.getElementById('volumesOfCashForm').deficiteSum.value = String(deficite).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+	countPercents(document.getElementById('volumesOfCashForm').deficiteSum)
 	return isOverflow
 }
 

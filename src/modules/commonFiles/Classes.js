@@ -42,7 +42,7 @@ export class ObjectOfBuilding {
 
 
 export class VariantOfFinancing {
-	constructor(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, key) {
+	constructor(totalValue, ownCash, bankCredit, escrowResource, investorA, investorB, deficite, key, name) {
 		this.totalValue = {
 				currentBalance: totalValue,
 				defaultBalance: totalValue,
@@ -94,6 +94,7 @@ export class VariantOfFinancing {
 				changesArr: [],
 				currentSpended: 0
 			},
+			this.name = name
 			this.currentDepositedSumChangesArr = [],
 			this.deficite = deficite,
 			this.key = key,

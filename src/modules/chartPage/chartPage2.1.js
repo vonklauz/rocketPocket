@@ -22,12 +22,11 @@ import {
 
 
 import {
-	hideElement,
-	hideAll,
-	showElement,
-	turnOnInputs,
-	turnOffInputs,
-	clearInputs
+	elementsHandler,
+	inputsHandler,
+	clearInputs,
+	displayChosenSelectOption,
+	setDefaultForm
 } from './form/formUsageSteps'
 
 
@@ -69,15 +68,20 @@ import {
 (function () {
 	//Ссылка на страницу с графиками
 	const chartPageLink = document.getElementById('chartPageLink')
-	const form = document.querySelector('.app__main__form')
+
 	const chartPageSelectObject = document.getElementById('chartPageSelectObject')
 	const chartPageSelectVariant = document.getElementById('chartPageSelectVariant')
 	const chartPageCreateVariantButton = document.getElementById('chartPageCreateVariantButton')
-	const estimateInput = document.getElementById('totalValueInput')
-	const activeInputs = document.getElementsByClassName('sourceOfResource')
 	const chartPageFormSaveButton = document.getElementById('chartPageFormSaveButton')
 	const deleteVariantButton = document.getElementById('deleteVariantButton')
+
+	const form = document.querySelector('.app__main__form')
+	const estimateInput = document.getElementById('totalValueInput')
+	const allFormInputs = form.getElementsByTagName('input')
+	const activeInputs = document.getElementsByClassName('sourceOfResource')
 	const doughNutChartWrapper = document.getElementById('doughNutChartWrapper')
+	
+	const chartPageSecondPart = document.getElementById('chartPageSecondPart')
 	
 	const chartWrapper = document.getElementById('chartWrapper')
 	const setBuildingPeriodButton = document.getElementById('setBuildingPeriodButton')
@@ -95,33 +99,61 @@ import {
 	let chosenVar = false
 	let chosenObj = false
 	let isOverflow;
+	let optionToDisplay;
 
 
 	window.addEventListener('load', () => {
 		objectsArr = loadObjects()
 		showLoadedData(objectsArr, chartPageSelectObject)
-		turnOffInputs(activeInputs)
+		//setDefaultForm([], activeInputs, allFormInputs)
 	})
 	
 	
+	for (let i = 0; i < activeInputs.length; i++) {
+		activeInputs[i].addEventListener('blur', () => {
+			countPercents(activeInputs[i])
+			isOverflow = validInputs(activeInputs, chosenObj.estimate.ownCost)
+			isLessThanTotalValue(isOverflow)
+		})
+	}
+
+
+	chartPageLink.addEventListener('click', () => {
+		clearSelect(chartPageSelectObject)
+		objectsArr = loadObjects()
+		showLoadedData(objectsArr, chartPageSelectObject)
+		displayChosenSelectOption(chartPageSelectObject)
+	})
+
+
 	chartPageSelectObject.addEventListener('change', () => {
 		chosenObj = chooseObject(chartPageSelectObject, objectsArr)
 		clearSelect(chartPageSelectVariant)
+		setDefaultForm([chartPageFormSaveButton, deleteVariantButton], activeInputs, allFormInputs)
+		elementsHandler('show',[chartPageCreateVariantButton])
+		elementsHandler('hide', [chartPageSecondPart])
 		loadedVariantsArray = showVariants(chosenObj, chartPageSelectVariant)
 		estimateInput.value = String(chosenObj.estimate.ownCost).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
 	})
 	
-/*
-<h1 class="app__h1 hide">График и источники финансирования проекта (план)</h1>
-<div class="main__chartPage__wrapper hide">
+	
+	chartPageCreateVariantButton.addEventListener('click', () => {
+		clearInputs(activeInputs)
+		removeChart(doughNutChartWrapper)
+		elementsHandler('hide', [chartPageSecondPart, deleteVariantButton])
+		elementsHandler('show', [chartPageFormSaveButton])
+		inputsHandler('enable', activeInputs)
+		chartPageSelectVariant.value = false
+		//displayChosenSelectOption(chartPageSelectVariant)
+	})
 
-*/
+
 	chartPageSelectVariant.addEventListener('change', () => {
 		chosenVar = chooseVariant(chartPageSelectVariant, loadedVariantsArray)
-		turnOffInputs(activeInputs)
-		showElement(deleteVariantButton)
-		hideElement(chartPageFormSaveButton)
+		inputsHandler('disable', activeInputs)
+		elementsHandler('hide', [chartPageFormSaveButton])
 		if (chosenVar) {
+			elementsHandler('show', [chartPageSecondPart, deleteVariantButton])
 			createDoughnutChart(chosenVar)
 			cleanTab(tab)
 			if (chosenVar.chart == true) {
@@ -134,44 +166,47 @@ import {
 				removeChart(chartWrapper)
 				removeChart(revenueChartWrapper)
 			}
-		}
-		else{
+		} else {
+			elementsHandler('hide', [chartPageSecondPart, deleteVariantButton])
+			removeChart(doughNutChartWrapper)
 			clearInputs(activeInputs)
 		}
 	})
 
-	
-	chartPageCreateVariantButton.addEventListener('click', () => {
-		turnOnInputs(activeInputs)
-		clearInputs(activeInputs)
-		removeChart(doughNutChartWrapper)
-		hideElement(deleteVariantButton)
-		hideAll(document.querySelectorAll('.chart_page__rest_part'))
-		showElement(chartPageFormSaveButton)
-	})
-	
-	
-	for (let i = 0; i < activeInputs.length; i++) {
-		activeInputs[i].addEventListener('blur', () => {
-			countPercents(activeInputs[i])
-			isOverflow = validInputs(activeInputs, chosenObj.estimate.ownCost)
-			isLessThanTotalValue(isOverflow)
-		})
-	}
-	
-	
+
 	chartPageFormSaveButton.addEventListener('click', () => {
-		saveVariant(chosenObj)
-		/*clearSelect(chartPageSelectVariant)
+		clearSelect(chartPageSelectVariant)
+		optionToDisplay = saveVariant(chosenObj)
 		loadedVariantsArray = showVariants(chosenObj, chartPageSelectVariant)
-		turnOffInputs(activeInputs)*/
+		displayChosenSelectOption(chartPageSelectVariant, optionToDisplay)
+		chosenVar = chooseVariant(chartPageSelectVariant, loadedVariantsArray)
+		inputsHandler('disable', activeInputs)
+		elementsHandler('hide', [chartPageFormSaveButton])
+		if (chosenVar) {
+			elementsHandler('show', [chartPageSecondPart, deleteVariantButton])
+			createDoughnutChart(chosenVar)
+			cleanTab(tab)
+			if (chosenVar.chart == true) {
+				createChart(chosenObj, chosenVar)
+				createRevenueChart(chosenObj, chosenVar)
+				//calculateValuesForCostsChart(chosenVar)
+				//createCostsChart(chosenVar)
+				//resetChosenVarValues(chosenVar)
+			} else {
+				removeChart(chartWrapper)
+				removeChart(revenueChartWrapper)
+			}
+		} else {
+			elementsHandler('hide', [chartPageSecondPart, deleteVariantButton])
+			clearInputs(activeInputs)
+		}
 	})
-	
-	
+
+
 	deleteVariantButton.addEventListener('click', () => {
 		deleteVariant(chosenObj, chosenVar)
 	})
-	
+
 
 	setBuildingPeriodButton.addEventListener('click', () => {
 		let startMonth = +(document.getElementById('StartOfPeriodMonth').value);
