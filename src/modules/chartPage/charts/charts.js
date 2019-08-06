@@ -46,7 +46,7 @@ export function createDoughnutChart(chosenVar) {
 export function createRevenueChart(chosenObj, chosenVar) {
 	removeChart(revenueChartWrapper)
 	document.getElementById('lastToRevenue').value = String(chosenVar.revenue.currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
-	document.getElementById('volumeOfAutoSells').value = chosenVar.autoSells
+	document.getElementById('volumeOfAutoSells').value = chosenVar.autoSells || '0'
 	revenueChartWrapper.innerHTML = '<canvas id="chartPageRevenueChart"></canvas>'
 	let chartPageRevenueChart = document.getElementById('chartPageRevenueChart')
 	let steppedChart = new Chart(chartPageRevenueChart, {
