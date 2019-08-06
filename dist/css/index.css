@@ -358,6 +358,7 @@ main {
 #enterCashButton:hover,
 #CountPercentPayments:hover,
 #removeCashButton:hover,
+#setRevenuePeriod:hover,
 #enterRevenueCashButton:hover,
 #removeRevenueCashButton:hover,
 .object__passport__textarea:focus,
@@ -471,13 +472,20 @@ main {
     flex-direction: column;
     -ms-flex-pack: distribute;
     justify-content: space-around;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
 }
 
 .chartPage__wrapper__right_block {
 	width: 75%;
 }
 
-.left_block__input_wrapper input {
+.left_block__input_wrapper {
+	width: 100%;
+}
+
+.left_block__input_wrapper__input {
 	width: 54%;
 	border: none;
 	border-radius: 20px;
@@ -578,6 +586,7 @@ main {
 #enterCashButton,
 #CountPercentPayments,
 #removeCashButton,
+#setRevenuePeriod,
 #enterRevenueCashButton,
 #removeRevenueCashButton {
 	height: 20%;
@@ -617,12 +626,15 @@ main {
 	flex-direction: column;
 }
 
-#chartPageTable {
+.basic_app_table {
 	width: 85%;
 }
 
-.monthTd {
+.narrowTd{
 	width: 15%;
+}
+
+.monthTd {
 	text-align: left;
 }
 
@@ -631,14 +643,13 @@ main {
 	box-shadow: none;
 }
 
-#chartPageTable,
+.basic_app_table,
 tr,
 td {
 	border: 1px solid rgba(28, 32, 51, .25);
 	border-radius: 5px;
 }
-
-#chartPageTable {
+.basic_app_table {
 	border-color: rgba(28, 32, 51, .15);
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
@@ -649,6 +660,40 @@ td {
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	border-radius: 10px;
+}
+
+.revenue_chart__h3{
+	margin: 0;
+}
+
+#sellingAutoMode{
+	cursor: pointer;
+	background: #fff;
+}
+
+#correctedRevenue,
+#lastToRevenue {
+	background-color: rgba(99, 199, 99, .5);
+}
+
+#escrowPercents{
+	background-color: rgba(99, 99, 199, .5);
+}
+
+#costsAndRevenueChartWrapper{
+	width: 85%;
+}
+
+#costsAndRevenueTable{
+	width: 50%;
+}
+
+.greenTd{
+	background-color: rgba(99, 199, 99, .3);
+}
+
+.redTd{
+	background-color: rgba(255, 99, 132, 0.66);
 }
 
 /*END chart and sources page styles*/
@@ -819,6 +864,7 @@ footer {
 }
 
 .light_blue_button{
+	cursor: pointer;
 	background: -webkit-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
 	background: -o-linear-gradient(255deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));
 	background: linear-gradient(195deg, rgba(34, 193, 219, .5), rgba(34, 193, 219, .4));

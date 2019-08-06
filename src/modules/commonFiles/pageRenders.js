@@ -45,12 +45,12 @@ chartPageLink.addEventListener('click', () => {
 })
 
 
-unitedChartLink.addEventListener('click', () => {
+/*unitedChartLink.addEventListener('click', () => {
 	hideRendered()
 	addRendered(unitedChartPage)
 	rememberPage('unitedChartPage')
 	$('#unitedChartPage').hide().fadeIn(500);
-})
+})*/
 
 
 //Функция выбирает текущий отрендеренный html, прячет его и убирает класс rendered, чтобы его можно было присвоить тому html, что встал на место скрытого

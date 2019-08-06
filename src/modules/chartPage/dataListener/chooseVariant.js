@@ -1,7 +1,8 @@
 import {
-	showOptions
+	showFinancingChartAndOptions
 } from '../chartOptions/chartOptions'
 
+//Передача выбранного объекта в переменную через select
 export function chooseObject($select, objectsArr) {
 	if (typeof + ($select.value) == 'number') {
 		let chosenObj = objectsArr[+($select.value)]
@@ -17,10 +18,12 @@ export function chooseVariant($select, loadedVariantsArray) {
 	//Выбранный вариант финансирования попадёт в эту переменную
 	let chosenVar;
 	const form = document.querySelector('.app__main__form')
+	const revenueInput = document.getElementById('correctedRevenue')
+	const escrowPercents = document.getElementById('escrowPercents')
 
 	chosenVar = loadedVariantsArray[$select.value]
 	if (chosenVar) {
-		showOptions(chosenVar)
+		showFinancingChartAndOptions(chosenVar)
 
 		//Отображение текущего остатка выбранного варианта на второй странице
 		$('#totalValueChart').val(String(chosenVar.totalValue.currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')).hide().fadeIn(500)
@@ -31,7 +34,7 @@ export function chooseVariant($select, loadedVariantsArray) {
 		$('#investorBChart').val(String(chosenVar.investorB.currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')).hide().fadeIn(500)
 		$('#deficiteSumChart').val(String(chosenVar.deficite).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')).hide().fadeIn(500)
 
-		//Отображение значений по умолчанию выбранного варианта на первой странице
+		//Отображение значений по умолчанию выбранного варианта в форме создания вариантов
 		form.totalValue.value = String(chosenVar.totalValue.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
 		countPercents(form.totalValue)
 
@@ -52,14 +55,17 @@ export function chooseVariant($select, loadedVariantsArray) {
 
 		form.deficiteSum.value = String(chosenVar.deficite).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
 		countPercents(form.deficiteSum)
-
+		
+		//Отображение скорректированной суммы выручки и доступного процента эскроу ресурса в боковом меню графика продаж
+		revenueInput.value = String(chosenVar.revenue.defaultBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+		escrowPercents.value = chosenVar.escrow.percents
 
 		return chosenVar
 	}
 	return false
 }
 
-
+//Подсчёт процентов от общего объёма финансирования в активном поле ввода формы создания вариантов
 export function countPercents(input) {
 	let totalVal = Number(document.getElementById('totalValueInput').value.replace(/ /g, ""))
 	let onePercent = totalVal / 100

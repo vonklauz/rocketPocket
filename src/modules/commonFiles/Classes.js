@@ -36,7 +36,8 @@ export class ObjectOfBuilding {
 				}
 			},
 			this.variantsOfFinancing = {},
-			this.key = 'objectOfBuilding' + Math.random()
+			this.key = 'objectOfBuilding' + Math.random(),
+			this.additional= ''
 	}
 }
 
@@ -88,17 +89,39 @@ export class VariantOfFinancing {
 				marketingCosts: '',
 				inflation: ''
 			},
-			this.revenue = {
-				currentBalance: totalValue * 1.30,
-				defaultBalance: totalValue * 1.30,
-				changesArr: [],
-				currentSpended: 0
+			this.prices = {
+				flats: '',
+				offices: '',
+				trade: '',
+				storages: '',
+				parking: ''
 			},
-			this.name = name
+			this.escrow = {
+				currentBalance: '',
+				defaultBalance: '',
+				changesArr: [],
+				currentSpended: 0,
+				percents: 0
+			},
+			this.revenue = {
+				currentBalance: '',
+				defaultBalance: '',
+				changesArr: [],
+				currentSpended: 0,
+				autoSells: '',
+				startMonth:'',
+				startYear:''
+			},
+			this.costOfAttractiveFinance = 0,
+			this.name = name,
 			this.currentDepositedSumChangesArr = [],
 			this.deficite = deficite,
 			this.key = key,
 			this.chart = false,
+			this.revenueChart = false,
+			this.consolidateChart = false,
+			this.loanRepaymentChart = false,
+			this.correctedM2OwnCost = false,
 			this.periods = [],
 			this.repaymentPeriods = []
 	}

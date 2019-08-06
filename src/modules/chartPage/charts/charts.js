@@ -45,6 +45,8 @@ export function createDoughnutChart(chosenVar) {
 
 export function createRevenueChart(chosenObj, chosenVar) {
 	removeChart(revenueChartWrapper)
+	document.getElementById('lastToRevenue').value = String(chosenVar.revenue.currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+	document.getElementById('volumeOfAutoSells').value = chosenVar.autoSells
 	revenueChartWrapper.innerHTML = '<canvas id="chartPageRevenueChart"></canvas>'
 	let chartPageRevenueChart = document.getElementById('chartPageRevenueChart')
 	let steppedChart = new Chart(chartPageRevenueChart, {
@@ -55,10 +57,19 @@ export function createRevenueChart(chosenObj, chosenVar) {
 					label: 'Текущий объём выручки (план)',
 					fill: false,
 					lineTension: 0,
-					steppedLine: true,
-					backgroundColor: 'rgba(99, 99, 199, .2)',
+					steppedLine: 'after',
+					backgroundColor: 'rgba(99, 199, 99, .2)',
 					borderColor: 'rgb(99, 199, 99)',
 					data: chosenVar.revenue.changesArr
+					},
+				{
+					label: 'Доступный эскроу ресурс',
+					fill: false,
+					lineTension: 0,
+					steppedLine: 'after',
+					backgroundColor: 'rgba(99, 99, 199, .2)',
+					borderColor: 'rgb(99, 99, 199)',
+					data: chosenVar.escrow.changesArr
 					}
 				]
 		},
@@ -94,7 +105,7 @@ export function createChart(chosenObj, chosenVar) {
 					fill: false,
 					lineTension: 0,
 					steppedLine: true,
-					backgroundColor: 'rgba(255, 99, 132, .2)',
+					backgroundColor: 'rgb(255, 99, 132)',
 					borderColor: 'rgb(255, 99, 132)',
 					data: chosenVar.totalValue.changesArr
 					},
@@ -111,7 +122,7 @@ export function createChart(chosenObj, chosenVar) {
 					label: 'Собственные средства',
 					backgroundColor: 'rgba(255, 99, 132, 0.1)',
 					steppedLine: true,
-					borderColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgba(255, 99, 132, 0.3)',
 					data: chosenVar.ownCash.changesArr
 					},
 				{
@@ -165,19 +176,21 @@ export function createChart(chosenObj, chosenVar) {
 
 
 export function createCostsChart(chosenVar) {
+
+	let [revenueArr, escrowArr] = connectCostsAndRevenue(chosenVar)
 	removeChart(costsAndRevenueChartWrapper)
 	costsAndRevenueChartWrapper.innerHTML = '<canvas id="chartPageCostsChart"></canvas>'
 	let chartPageCostsChart = document.getElementById('chartPageCostsChart')
 	let steppedChart = new Chart(chartPageCostsChart, {
 		type: 'line',
 		data: {
-			labels: chosenVar.repaymentPeriods,
+			labels: chosenVar.periods,
 			datasets: [{
 					label: 'Общий объём финансирования (план)',
 					fill: false,
 					lineTension: 0,
 					steppedLine: true,
-					backgroundColor: 'rgba(255, 99, 132, .2)',
+					backgroundColor: 'rgb(255, 99, 132)',
 					borderColor: 'rgb(255, 99, 132)',
 					data: chosenVar.totalValue.changesArr
 					},
@@ -194,7 +207,7 @@ export function createCostsChart(chosenVar) {
 					label: 'Собственные средства',
 					backgroundColor: 'rgba(255, 99, 132, 0.1)',
 					steppedLine: true,
-					borderColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgba(255, 99, 132, 0.3)',
 					data: chosenVar.ownCash.changesArr
 					},
 				{
@@ -232,7 +245,16 @@ export function createCostsChart(chosenVar) {
 					steppedLine: true,
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 199, 99)',
-					data: chosenVar.revenue.changesArr
+					data: revenueArr
+					},
+				{
+					label: 'Доступный эскроу ресурс',
+					fill: false,
+					lineTension: 0,
+					steppedLine: true,
+					backgroundColor: 'rgba(99, 99, 199, .2)',
+					borderColor: 'rgb(99, 99, 199)',
+					data: escrowArr
 					}
 				]
 		},
@@ -254,25 +276,29 @@ export function createCostsChart(chosenVar) {
 }
 
 
-export function resetChosenVarValues(chosenVar) {
-	let sourcesArr = [chosenVar.totalValue.changesArr, chosenVar.ownCash.changesArr, chosenVar.bankCredit.changesArr, chosenVar.escrowResource.changesArr, chosenVar.investorA.changesArr, chosenVar.investorB.changesArr, chosenVar.currentDepositedSumChangesArr]
+export function connectCostsAndRevenue(chosenVar) {
+	let [revenueArr, escrowArr] = [[], []]
 
-	for (let i = 0; i < sourcesArr.length; i++) {
-		sourcesArr[i].length = chosenVar.periods.length
-		console.log(sourcesArr[i])
-	}
-}
-
-
-export function calculateValuesForCostsChart(chosenVar) {
-	let sourcesArr = [chosenVar.totalValue.changesArr, chosenVar.ownCash.changesArr, chosenVar.bankCredit.changesArr, chosenVar.escrowResource.changesArr, chosenVar.investorA.changesArr, chosenVar.investorB.changesArr, chosenVar.currentDepositedSumChangesArr];
-
-	for (let i = 0; i < sourcesArr.length; i++) {
-		for (let n = chosenVar.periods.length; n < chosenVar.repaymentPeriods.length; n++) {
-			sourcesArr[i][n] = sourcesArr[i][chosenVar.periods.length - 1]
+	let startIndex = chosenVar.repaymentPeriods.indexOf(chosenVar.periods[0])
+	if (startIndex > -1) {
+		for (let i = 0; i < chosenVar.periods.length; i++) {
+			chosenVar.revenue.changesArr[i] ? revenueArr[i] = chosenVar.revenue.changesArr[startIndex] : false
+			chosenVar.escrow.changesArr[i] ? escrowArr[i] = chosenVar.escrow.changesArr[startIndex] : false
+			startIndex++
+		}
+	} else {
+		startIndex = chosenVar.periods.indexOf(chosenVar.repaymentPeriods[0])
+		console.log(startIndex)
+		if (startIndex > -1) {
+			for (let i = 0; i < chosenVar.periods.length; i++) {
+				chosenVar.revenue.changesArr[i] ? revenueArr[startIndex] = chosenVar.revenue.changesArr[i] : false
+				chosenVar.escrow.changesArr[i] ? escrowArr[startIndex] = chosenVar.escrow.changesArr[i] : false
+				startIndex++
+			}
 		}
 	}
 
+	return [revenueArr, escrowArr]
 }
 
 

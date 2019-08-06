@@ -1,5 +1,9 @@
+import {
+	elementsHandler
+} from '../form/formUsageSteps'
+
 //Функция отображения опций под графиком
-export function showOptions(chosenVar) {
+export function showFinancingChartAndOptions(chosenVar) {
 	//Блок с опциями под графиком
 	const chartAndSourcesH1 = document.getElementById('chartAndSourcesH1')
 	const chartWrapper = document.querySelector('.main__chartPage__wrapper')
@@ -7,10 +11,11 @@ export function showOptions(chosenVar) {
 	const setPeriodOption = document.querySelector('.chart_options__set_period__wrapper')
 	const addMoneyOption = document.querySelector('.chart_options__add_cash__wrapper')
 	const chartPageTable = document.querySelector('.chart_page__table__wrapper')
+	const chartPageRepayment = document.querySelector('.chart_page__repayment_wrapper')
 
-	
 	chartAndSourcesH1.classList.remove('hide')
 	chartPageOptions.classList.remove('hide')
+
 	if (chosenVar.periods.length > 0) {
 		chartWrapper.classList.remove('hide')
 		setPeriodOption.classList.add('hide')
@@ -25,11 +30,34 @@ export function showOptions(chosenVar) {
 }
 
 
+export function showRepaymentChartAndOptions(chosenVar) {
+
+	const chartPageRepayment = document.querySelector('.chart_page__repayment_wrapper')
+	const chartPageRevenueOptions = document.querySelector('.revenue_chart__options')
+	const chartPageRevenueSetPeriod = document.querySelector('.revenue_chart__options_set_period')
+	const chartPageRevenueAddCash = document.querySelector('.revenue_chart__options__add_cash')
+	const chartPageRevenueChart = document.querySelector('.revenue_chart__wrapper')
+
+	chartPageRepayment.classList.remove('hide')
+	chartPageRevenueOptions.classList.remove('hide')
+
+	if (chosenVar.repaymentPeriods.length > 0) {
+		chartPageRevenueSetPeriod.classList.add('hide')
+		chartPageRevenueAddCash.classList.remove('hide')
+		chartPageRevenueChart.classList.remove('hide')
+	} else {
+		chartPageRevenueSetPeriod.classList.remove('hide')
+		chartPageRevenueAddCash.classList.add('hide')
+		chartPageRevenueChart.classList.add('hide')
+	}
+}
+
+
 //Добавление/удаление денежной суммы на графике у выбранного источника денежных средств
 export function addCashToChart(chosenVar, source, volume, month, year, operation, periodsArr) {
 	let incomeDate = month + ' ' + year
-	let indexOfDate
-	let sourceVolume
+	let indexOfDate;
+	let sourceVolume;
 
 	if (!year) {
 		alert('Укажите год')
@@ -67,6 +95,9 @@ export function addCashToChart(chosenVar, source, volume, month, year, operation
 			chosenVar[source].currentBalance -= sourceVolume
 			if (source != 'revenue') {
 				document.getElementById(source + 'Chart').value = String(chosenVar[source].currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+			}
+			if (source == 'revenue') {
+				countAvailableEscrow(chosenVar, chosenVar.escrow.percents)
 			}
 		} else {
 			alert('Введённая сумма превышает остаток данного источника.')
@@ -128,26 +159,42 @@ export function setBuildingPeriod(startMonth, startYear, endMonth, endYear) {
 
 
 //Создание периода продаж выбранного объекта(период строительства + заданный срок после)
-export function setRepaymentPeriod(objectPeriodsArray, endMonth, endYear) {
-	const defaultMonthsArray = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
-	let repaymentPeriodsArray = objectPeriodsArray.slice()
-	let startPoint = endMonth + 1
-	let endPoint = endMonth + 7
-	let halfYear = 6
-	if (endMonth <= 5) {
-		for (let i = startPoint; i < endPoint; i++) {
-			repaymentPeriodsArray.push(defaultMonthsArray[i] + " " + endYear)
-		}
-	} else {
-		for (let i = startPoint; i < 12; i++) {
-			repaymentPeriodsArray.push(defaultMonthsArray[i] + " " + endYear)
-			halfYear--
-		}
-		for (let i = 0; i < halfYear; i++) {
-			repaymentPeriodsArray.push(defaultMonthsArray[i] + " " + (endYear + 1))
+export function setSellingAutoMode(chosenObj, chosenVar) {
+
+	chosenVar.revenue.changesArr.length = 0
+	chosenVar.revenue.currentBalance = chosenVar.revenue.defaultBalance
+	chosenVar.revenue.currentSpended = 0
+	chosenVar.escrow.changesArr.length = 0
+	chosenVar.autoSells = document.getElementById('volumeOfAutoSells').value
+
+	let sumOfSells = Number(document.getElementById('volumeOfAutoSells').value.replace(/ /g, ""))
+
+	let month, year;
+
+	for (let i = 0; i < chosenVar.repaymentPeriods.length; i++) {
+
+		month = chosenVar.repaymentPeriods[i].slice(0, chosenVar.repaymentPeriods[i].length - 3)
+		year = chosenVar.repaymentPeriods[i].slice(chosenVar.repaymentPeriods[i].length - 2)
+
+		if (chosenVar.revenue.currentBalance > sumOfSells) {
+			addCashToChart(chosenVar, ['revenue'], String(sumOfSells), month, year, '+', chosenVar.repaymentPeriods)
+		} else {
+			addCashToChart(chosenVar, ['revenue'], String(chosenVar.revenue.currentBalance), month, year, '+', chosenVar.repaymentPeriods)
 		}
 	}
-	return repaymentPeriodsArray
+	document.getElementById('lastToRevenue').value = String(chosenVar.revenue.currentBalance).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')
+	countAvailableEscrow(chosenVar, chosenVar.escrow.percents)
+}
+
+
+export function checkAvailableEscrow() {
+	let availableEscrow = Number(document.getElementById('escrowPercents').value)
+
+	if (availableEscrow <= 0 || availableEscrow >= 100) {
+		alert("Указан некорректный процент допустимого эскроу.")
+		return false
+	}
+	return availableEscrow
 }
 
 
@@ -170,7 +217,7 @@ export function countCurrentWastedSum(chosenVar) {
 
 
 //Сохранение выбранного варианта финансирования после внесённых изменений
-export function saveChangesInChosenVar(chosenObj,chosenVar) {
+export function saveChangesInChosenVar(chosenObj, chosenVar) {
 	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 }
 
@@ -185,10 +232,87 @@ export function createTotalValueLine(chosenVar) {
 
 
 //Удаление варианта из базы
-export function deleteVariant(chosenObj,chosenVar) {
+export function deleteVariant(chosenObj, chosenVar) {
 	alert('Вариант удалён.')
 	delete(chosenObj.variantsOfFinancing[chosenVar.key])
 	localStorage.setItem(chosenObj.key, JSON.stringify(chosenObj))
 	window.location.reload()
 
+}
+
+//Расчёт доступной суммы к эскроу кредиту в зависимости от переданной суммы продаж и процентного значения от неё
+export function countAvailableEscrow(chosenVar, percents) {
+	let availableEscrow;
+	chosenVar.escrow.currentSpended = 0
+	for (let i = 0; i < chosenVar.repaymentPeriods.length; i++) {
+
+		availableEscrow = (chosenVar.revenue.changesArr[i] / 100) * percents
+		chosenVar.escrow.changesArr[i] = availableEscrow
+		chosenVar.escrow.currentSpended += availableEscrow
+
+		if (chosenVar.repaymentPeriods[i] == chosenVar.periods[chosenVar.periods.length - 1]) {
+			break
+		}
+	}
+}
+
+
+export function checkRevenue(chosenVar) {
+
+	const warning = document.getElementById('smallWarning')
+	const refreshRevenueChartButton = document.getElementById('refreshRevenueChartButton')
+	let revenueToCheck = document.getElementById('totalValueTd').innerText
+	revenueToCheck = Number(revenueToCheck.replace(/ /g, ""))
+
+	if (revenueToCheck != chosenVar.revenue.defaultBalance) {
+		elementsHandler('show', [warning, refreshRevenueChartButton])
+		chosenVar.revenue.defaultBalance = revenueToCheck
+		chosenVar.revenue.currentBalance = revenueToCheck
+	}
+}
+
+
+export function checkEscrow(chosenVar) {
+
+	const warning = document.getElementById('smallWarning')
+	const refreshRevenueChartButton = document.getElementById('refreshRevenueChartButton')
+	let escrowPercentsToCheck = Number(document.getElementById('escrowPercents').value)
+
+	if (escrowPercentsToCheck != chosenVar.escrow.percents) {
+		elementsHandler('show', [warning, refreshRevenueChartButton])
+		chosenVar.escrow.percents = escrowPercentsToCheck
+	}
+
+}
+
+
+export function refreshRevenueLine(chosenVar) {
+
+	let revenueArr = [...chosenVar.revenue.changesArr]
+
+	chosenVar.revenue.currentBalance = chosenVar.revenue.defaultBalance
+	chosenVar.revenue.currentSpended = 0
+	chosenVar.revenue.changesArr.length = 0
+
+	chosenVar.revenue.currentBalance -= revenueArr[0]
+	chosenVar.revenue.currentSpended += revenueArr[0]
+	chosenVar.revenue.changesArr.push(revenueArr[0])
+
+	for (let i = 1; i < chosenVar.repaymentPeriods.length; i++) {
+
+		let item = revenueArr[i] - revenueArr[i - 1]
+		
+		if(item + revenueArr[i - 1] < chosenVar.revenue.defaultBalance) {
+			chosenVar.revenue.changesArr[i] = revenueArr[i]
+			chosenVar.revenue.currentBalance -= item
+			chosenVar.revenue.currentSpended += item
+		}
+		
+		else{
+			chosenVar.revenue.changesArr[i] = chosenVar.revenue.defaultBalance
+			chosenVar.revenue.currentBalance = 0
+			chosenVar.revenue.currentSpended = chosenVar.revenue.defaultBalance
+		}
+		
+	}
 }

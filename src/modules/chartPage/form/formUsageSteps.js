@@ -41,11 +41,23 @@ export function clearInputs(inputValues) {
 }
 
 
+export function setOptionToShow(optionToChoose, object, objectsArr) {
+		for (let i = 0; i < objectsArr.length; i++) {
+			if (objectsArr[i].key == object.key) {
+				optionToChoose = i
+			}
+		}
+	return optionToChoose
+	}
+
+
 export function displayChosenSelectOption(select, option) {
 	let options = select.getElementsByTagName('option')
+	console.log(option)
 	for(let i = 0; i < options.length; i++) {
 		if(options[i].value == option){
 			options[i].selected = true
+			console.log(options[i].selected)
 		}
 	}
 	

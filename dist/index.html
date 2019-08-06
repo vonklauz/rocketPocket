@@ -16,9 +16,9 @@
 		<nav>
 			<ul class="menu">
 				<li class="menu_point" id="volumePageLink">Объекты</li>
-				<li class="menu_point" id="chartPageLink">График и источники финансирования</li>
-				<li class="menu_point" id="unitedChartLink">Консолидированный график</li>
-				<li class="menu_point">Модель продаж</li>
+				<li class="menu_point" id="chartPageLink">Финансовый план</li>
+				<li class="menu_point" id="SellsModel">Модель продаж</li>
+				<li class="menu_point" id="unitedChartLink">Консолидация</li>
 			</ul>
 		</nav>
 	</header>
@@ -33,27 +33,27 @@
 					<div class="object__passport__col large_col">
 						<div class="label_input_wrapper">
 							<label for="" class="object__passport__label">Название объекта<span class="red">*</span></label>
-							<input class="large_input" type="text" id="objectName" maxlength="60" placeholder="5 - 60 символов">
+							<input class="large_input requiredToFullfill" type="text" id="objectName" maxlength="60" placeholder="5 - 60 символов">
 						</div>
 						<div class="label_input_wrapper">
-							<label for="" class="object__passport__label">Сметная стоимость<span class="red">*</span></label><input class="small_input number_input" type="text" id="objectEstimate">
+							<label for="" class="object__passport__label">Сметная стоимость<span class="red">*</span></label><input class="small_input number_input requiredToFullfill" type="text" id="objectEstimate">
 						</div>
 						<div class="label_input_wrapper">
-							<label for="" class="object__passport__label">Объём м<sup>2</sup> к реализации<span class="red">*</span></label><input class="small_input number_input" type="text" id="objectArea">
+							<label for="" class="object__passport__label">Объём м<sup>2</sup> к реализации<span class="red">*</span></label><input class="small_input number_input requiredToFullfill" type="text" id="objectArea">
 						</div>
 						<div class="label_input_wrapper">
 							<label for="passportUl" id="passportUlLabel">В том числе (м<sup>2</sup>) <span class="red">*</span>:</label>
 							<ul class="passport__ul" id="passportUl">
-								<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input micro_input" id="flatsSquare"></li>
-								<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesSquare"></li>
-								<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeSquare"></li>
-								<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesSquare"></li>
-								<li><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingSquare"></li>
+								<li><label for="" class="object__passport__label">Общ. площадь квартир</label><input type="text" class="number_input micro_input requiredToFullfill" id="flatsSquare"></li>
+								<li><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input requiredToFullfill" id="officesSquare"></li>
+								<li><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input requiredToFullfill" id="tradeSquare"></li>
+								<li><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input requiredToFullfill" id="storagesSquare"></li>
+								<li><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input requiredToFullfill" type="text" id="parkingSquare"></li>
 							</ul>
 						</div>
 					</div>
 					<div class="object__passport__col small_col">
-						<textarea class="object__passport__textarea" name="" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта. Максимальная длина: 800 символов."></textarea>
+						<textarea class="object__passport__textarea requiredToFullfill" name="additionalInfo" id="" cols="30" rows="10" maxlength="800" placeholder="Описание объекта. Максимальная длина: 800 символов." disabled></textarea>
 					</div>
 				</div>
 				<button class="main__form__button light_blue_button" id="objectPassportNextStepButton">Далее</button>
@@ -67,11 +67,11 @@
 							<label for="" class="passport__ul__label">
 								<label id="markupUlLabel" for="markupUl">Плановая рентабельность, % :</label>
 								<ul class="passport__ul" id="markupUl">
-									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input" id="flatsMarkup" maxlength="4"></li>
-									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesMarkup" maxlength="4"></li>
-									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradeMarkup" maxlength="4"></li>
-									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesMarkup" maxlength="4"></li>
-									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input requiredToFullfill" id="flatsMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input requiredToFullfill" id="officesMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input requiredToFullfill" id="tradeMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input requiredToFullfill" id="storagesMarkup" maxlength="4"></li>
+									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input requiredToFullfill" type="text" id="parkingMarkup" maxlength="4"></li>
 									<li><button class="basic_style" id="countPriceButton">Рассчитать</button></li>
 								</ul>
 							</label>
@@ -80,11 +80,11 @@
 							<label for="" class="passport__ul__label">
 								<label id="priceUlLabel" for="priceUl">Цена реализации 1м<sup>2</sup> :</label>
 								<ul class="passport__ul" id="priceUl">
-									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input" id="flatsPrice" disabled></li>
-									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input" id="officesPrice" disabled></li>
-									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input" id="tradePrice" disabled></li>
-									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input" id="storagesPrice" disabled></li>
-									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input" type="text" id="parkingPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Квартиры</label><input type="text" class="number_input micro_input requiredToFullfill" id="flatsPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Офисы</label><input type="text" class="number_input micro_input requiredToFullfill" id="officesPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Торг. площади</label><input type="text" class="number_input micro_input requiredToFullfill" id="tradePrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Склады</label><input type="text" class="number_input micro_input requiredToFullfill" id="storagesPrice" disabled></li>
+									<li class="hide"><label for="" class="object__passport__label">Парковка</label><input class="number_input micro_input requiredToFullfill" type="text" id="parkingPrice" disabled></li>
 								</ul>
 							</label>
 						</div>
@@ -154,43 +154,43 @@
 			</div>
 			<div id="chartPageSecondPart" class="hide">
 				<!--Начало раздела с графиками-->
-				<h1 class="app__h1 hide chart_page__rest_part" id="chartAndSourcesH1">График и источники финансирования проекта (план)</h1>
-				<div class="main__chartPage__wrapper hide chart_page__rest_part">
+				<h1 class="hide" id="chartAndSourcesH1">График и источники финансирования проекта (план)</h1>
+				<div class="main__chartPage__wrapper hide">
 					<aside class="chartPage__wrapper__left_block basic_style_noHover">
 						<div class="left_block__input_wrapper light_blue">
 							<div class="input_wrapper__chartPage_text">Общий объём финансирования</div>
-							<input type="text" disabled id="totalValueChart" class="light_blue" value="">
+							<input type="text" disabled id="totalValueChart" class="left_block__input_wrapper__input light_blue" value="">
 						</div>
 						<div class="left_block__input_wrapper">
 							<div class="input_wrapper__chartPage_text">Собственные средства</div>
-							<input type="text" disabled id="ownCashChart" value="">
+							<input type="text" disabled id="ownCashChart" class="left_block__input_wrapper__input" value="">
 						</div>
 						<div class="left_block__input_wrapper">
 							<div class="input_wrapper__chartPage_text">Кредит банка под залог</div>
-							<input type="text" disabled id="bankCreditChart" value="">
+							<input type="text" disabled id="bankCreditChart" class="left_block__input_wrapper__input" value="">
 						</div>
 						<div class="left_block__input_wrapper">
 							<div class="input_wrapper__chartPage_text">Кредит банка / эскроу ресурс</div>
-							<input type="text" disabled id="escrowResourceChart" value="">
+							<input type="text" disabled id="escrowResourceChart" class="left_block__input_wrapper__input" value="">
 						</div>
 						<div class="left_block__input_wrapper">
 							<div class="input_wrapper__chartPage_text">Инвестор категории "А"</div>
-							<input type="text" disabled id="investorAChart" value="">
+							<input type="text" disabled id="investorAChart" class="left_block__input_wrapper__input" value="">
 						</div>
 						<div class="left_block__input_wrapper">
 							<div class="input_wrapper__chartPage_text">Инвестор категории "В"</div>
-							<input type="text" disabled id="investorBChart" value="">
+							<input type="text" disabled id="investorBChart" class="left_block__input_wrapper__input" value="">
 						</div>
 						<div class="left_block__input_wrapper block_error">
 							<div class="input_wrapper__chartPage_text">Дефицит ресурсов</div>
-							<input type="text" disabled id="deficiteSumChart" class="block_error" value="">
+							<input type="text" disabled id="deficiteSumChart" class="block_error left_block__input_wrapper__input" value="">
 						</div>
 					</aside>
-					<div class="chartPage__wrapper__right_block" id="chartWrapper"></div>
+					<div class="chartPage__wrapper__right_block basic_style_noHover" id="chartWrapper"></div>
 				</div>
 
 				<!--Опции первого графика-->
-				<div class="chartPage__wrapper__chart_options hide chart_page__rest_part">
+				<div class="chartPage__wrapper__chart_options hide">
 
 					<!--Задание периода строительства-->
 					<div class="chart_options__set_period__wrapper">
@@ -235,7 +235,7 @@
 						<button id="setBuildingPeriodButton">Сохранить</button>
 					</div>
 
-					<!--Ввод денежный сумм на график-->
+					<!--Ввод денежных сумм на график-->
 					<div class="chart_options__add_cash__wrapper">
 						Объём средств и источник финансирования:
 						<div class="set_period__wrapper_content">
@@ -276,9 +276,9 @@
 				</div>
 
 				<!--Таблица под первым графиком-->
-				<div class="chart_page__table__wrapper hide chart_page__rest_part">
+				<div class="chart_page__table__wrapper hide">
 					<h2 id="chartPageTableH2">Определение стоимости привлечения ресурсов</h2>
-					<table id="chartPageTable">
+					<table class="basic_app_table" id="chartPageTable">
 						<tr>
 							<th>Источник:</th>
 							<th class="bankTd">Кредит банка под залог</th>
@@ -298,59 +298,185 @@
 							<th>Месяц</th>
 						</tr>
 					</table>
+					<h2>Коррекция себестоимости и цены реализации</h2>
+					<table class="basic_app_table" id="costCorrectionTable">
+						<tr>
+							<th></th>
+							<th>Квартиры</th>
+							<th>Офисы</th>
+							<th>Торг. площади</th>
+							<th>Склады</th>
+							<th>Парковка</th>
+							<th>По объекту</th>
+						</tr>
+						<tr>
+							<th>Себестоимость м<sup>2</sup></th>
+						</tr>
+						<tr>
+							<td>Без учёта стоимости привлечения фин. рес. </td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>С учётом стоимости привлечения фин. рес. </td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<th>Цена реализации м<sup>2</sup></th>
+						</tr>
+						<tr>
+							<td>Без учёта стоимости привлечения фин. рес. </td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>С учётом стоимости привлечения фин. рес.</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
 					<button id="CountPercentPayments">Рассчитать</button>
 				</div>
 
 				<!--График продаж-->
-				<div class="chart_page__repayment_wrapper hide chart_page__rest_part">
-					<h2>Продажи / формирование эскроу ресурса</h2>
-					<div class="main__chartPage__wrapper">
+				<div class="chart_page__repayment_wrapper hide">
+					<h1>Продажи / формирование эскроу ресурса</h1>
+					<small class="red hide" id="smallWarning">Внимание! Данные изменены: необходимо обновить график.</small>
+					<div class="main__chartPage__wrapper revenue_chart__wrapper">
 						<aside class="chartPage__wrapper__left_block revenue_chart__aside">
+							<div class="left_block__input_wrapper ">
+								<div class="input_wrapper__chartPage_text">Бюджет выручки</div>
+								<input type="text" disabled id="correctedRevenue" class="left_block__input_wrapper__input" value="">
+							</div>
+							<div class="left_block__input_wrapper ">
+								<div class="input_wrapper__chartPage_text">Остаток к выручке</div>
+								<input type="text" disabled id="lastToRevenue" class="left_block__input_wrapper__input" value="">
+							</div>
+							<div class="left_block__input_wrapper ">
+								<div class="input_wrapper__chartPage_text">Процент от выручки, доступный как кредит эскроу</div>
+								<input type="text" id="escrowPercents" class="left_block__input_wrapper__input" value="" maxlength="4" placeholder="0.1% - 99.9%">
+							</div>
+							<button class="left_block__input_wrapper__input basic_style light_blue_button hide" id="refreshRevenueChartButton">Обновить</button>
+							<h3 class="revenue_chart__h3">Автоматический режим</h3>
+							<div class="left_block__input_wrapper ">
+								<div class="input_wrapper__chartPage_text">Средний объём продаж / мес.</div>
+								<input type="text" id="volumeOfAutoSells" class="left_block__input_wrapper__input number_input" value="">
+							</div>
+							<button class="left_block__input_wrapper__input basic_style" id="sellingAutoMode">Задать</button>
 						</aside>
-						<div class="chartPage__wrapper__right_block" id="revenueChartWrapper"></div>
+						<div class="chartPage__wrapper__right_block basic_style_noHover" id="revenueChartWrapper"></div>
 					</div>
-					<div class="chart_options__add_cash__wrapper">
-						Объём продаж объекта недвижимости:
-						<div class="set_period__wrapper_content">
-							Сумма:
-							<input type="text" class="input_wrapper__input add_cash__input" id="sumOfRevenue">
+					<div class="chartPage__wrapper__chart_options revenue_chart__options hide">
+
+						<!--Задание периода строительства-->
+						<div class="chart_options__set_period__wrapper revenue_chart__options_set_period">
+							Начало продаж:
+							<div class="set_period__wrapper_content">
+								<select name="" class="set_period__select" id="revenueStartMonth">
+									<option value="0">Январь</option>
+									<option value="1">Февраль</option>
+									<option value="2">Март</option>
+									<option value="3">Апрель</option>
+									<option value="4">Май</option>
+									<option value="5">Июнь</option>
+									<option value="6">Июль</option>
+									<option value="7">Август</option>
+									<option value="8">Сентябрь</option>
+									<option value="9">Октябрь</option>
+									<option value="10">Ноябрь</option>
+									<option value="11">Декабрь</option>
+								</select>
+								Год: 20
+								<input type="text" class="input_wrapper__input  set_period__input number_input" id="revenueStartYear" maxlength="2">
+							</div>
+							Окончание продаж:
+							<div class="set_period__wrapper_content">
+								<select name="" class="set_period__select" id="revenueLastMonth">
+									<option value="0">Январь</option>
+									<option value="1">Февраль</option>
+									<option value="2">Март</option>
+									<option value="3">Апрель</option>
+									<option value="4">Май</option>
+									<option value="5">Июнь</option>
+									<option value="6">Июль</option>
+									<option value="7">Август</option>
+									<option value="8">Сентябрь</option>
+									<option value="9">Октябрь</option>
+									<option value="10">Ноябрь</option>
+									<option value="11">Декабрь</option>
+								</select>
+								Год: 20
+								<input type="text" class="input_wrapper__input  set_period__input number_input" id="revenueLastYear" maxlength="2">
+							</div>
+							<button class="" id="setRevenuePeriod">Сохранить</button>
 						</div>
-						Дата продажи:
-						<div class="set_period__wrapper_content">
-							<select name="" class="set_period__select" id="monthOfRevenue">
-								<option value="Январь">Январь</option>
-								<option value="Февраль">Февраль</option>
-								<option value="Март">Март</option>
-								<option value="Апрель">Апрель</option>
-								<option value="Май">Май</option>
-								<option value="Июнь">Июнь</option>
-								<option value="Июль">Июль</option>
-								<option value="Август">Август</option>
-								<option value="Сентябрь">Сентябрь</option>
-								<option value="Октябрь">Октябрь</option>
-								<option value="Ноябрь">Ноябрь</option>
-								<option value="Декабрь">Декабрь</option>
-							</select>
-							Год: 20
-							<input type="text" class="input_wrapper__input  set_period__input number_input" id="yearOfRevenue" maxlength="2">
-						</div>
-						<div class="chart_options__add_cash__buttons">
-							<button id="enterRevenueCashButton">+</button>
-							<button id="removeRevenueCashButton">-</button>
+
+						<!--Ввод денежный сумм на график-->
+						<div class="chart_options__add_cash__wrapper revenue_chart__options__add_cash">
+							<h3 class="revenue_chart__h3">Ручной режим продаж</h3>
+							<div class="set_period__wrapper_content">
+								Сумма:
+								<input type="text" class="input_wrapper__input add_cash__input number_input" id="sumOfRevenue">
+							</div>
+							Дата финансового вложения:
+							<div class="set_period__wrapper_content">
+								<select name="" class="set_period__select" id="monthOfRevenue">
+									<option value="Январь">Январь</option>
+									<option value="Февраль">Февраль</option>
+									<option value="Март">Март</option>
+									<option value="Апрель">Апрель</option>
+									<option value="Май">Май</option>
+									<option value="Июнь">Июнь</option>
+									<option value="Июль">Июль</option>
+									<option value="Август">Август</option>
+									<option value="Сентябрь">Сентябрь</option>
+									<option value="Октябрь">Октябрь</option>
+									<option value="Ноябрь">Ноябрь</option>
+									<option value="Декабрь">Декабрь</option>
+								</select>
+								Год: 20
+								<input type="text" class="input_wrapper__input  set_period__input number_input" id="yearOfRevenue" maxlength="2">
+							</div>
+							<div class="chart_options__add_cash__buttons">
+								<button id="enterRevenueCashButton">+</button>
+								<button id="removeRevenueCashButton">-</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!--Консолидированный график-->
-			<div class="chart_page__costs_wrapper hide chart_page__rest_part">
-				<h2>Бюджет выручки</h2>
-				<div class="main__chartPage__wrapper">
-					<aside class="chartPage__wrapper__left_block costsAndRevenueChartWrapper_aside">
-					</aside>
-					<div class="chartPage__wrapper__right_block" id="costsAndRevenueChartWrapper"></div>
+
+				<!--Консолидированный график-->
+				<div class="chart_page__costs_wrapper hide">
+					<h1>Расходы / доходы в заданном режиме продаж</h1>
+					<div class="main__chartPage__wrapper">
+						<div class="chartPage__wrapper__right_block basic_style_noHover" id="costsAndRevenueChartWrapper"></div>
+					</div>
+					<div class="chart_page__table__wrapper">
+						<h2>Профицит / дефицит эскроу ресурса в заданном режиме продаж</h2>
+						<table id="costsAndRevenueTable">
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
+		<!--Блок в разработке-->
 		<div id="unitedChartPage" class="hide">
 			<h1 class="app__h1">Консолидированный график</h1>
 			<div class="main__united_chart__options__wrapper">
@@ -378,7 +504,7 @@
 		</div>
 	</main>
 	<footer>
-		Разработано в IT-Finance Instrument. Все права защищены.
+		(Версия 0.8.5 Beta) Разработано в IT-Finance Instrument. Все права защищены.
 	</footer>
 
 	<script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
@@ -393,10 +519,7 @@
 			messagingSenderId: "426651486308"
 		};
 		firebase.initializeApp(config);
-
 	</script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script type="text/javascript" src="bundle.js"></script></body>
-
-</html>
+<script type="text/javascript" src="bundle.js"></script></body></html>

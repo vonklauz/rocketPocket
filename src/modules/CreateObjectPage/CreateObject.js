@@ -2,11 +2,26 @@ import {
 	ObjectOfBuilding
 } from '../commonFiles/Classes'
 
+
 import {
 	loadObjects,
 	showLoadedData,
 	clearSelect
 } from '../commonFiles/dataLoader'
+
+
+import {
+	chooseObject
+} from '../chartPage/dataListener/chooseVariant'
+
+
+import {
+	elementsHandler,
+	inputsHandler,
+	setOptionToShow,
+	displayChosenSelectOption
+} from '../chartPage/form/formUsageSteps'
+
 
 (function () {
 
@@ -15,7 +30,7 @@ import {
 	let objectsArr = []
 
 	const form = document.querySelector('.object__passport')
-	const formInputs = form.getElementsByTagName('input')
+	const formInputs = form.getElementsByClassName('requiredToFullfill')
 	const volumesOfCashCreateObjectButton = document.getElementById('volumesOfCashCreateObjectButton')
 	const deleteObjectButton = document.getElementById('deleteObjectButton')
 	const volumesOfCashSaveButton = document.getElementById('volumesOfCashSaveButton')
@@ -45,6 +60,7 @@ import {
 	let m2OwnCost;
 	let objectToSave;
 	let chosenObj;
+	let optionToChoose;
 
 
 	function hideUselessButtons() {
@@ -162,16 +178,16 @@ import {
 		secondHalfOfForm.classList.remove('hide')
 		objectPassportNextStepButton.classList.add('hide')
 	}
-	
-	
+
+
 	function hideSecondHalfOfForm() {
 		secondHalfOfForm.classList.add('hide')
 		objectPassportNextStepButton.classList.remove('hide')
 	}
-	
-	
-	function showAllInputs(){
-		for(let i = 0; i < formInputs.length; i++){
+
+
+	function showAllInputs() {
+		for (let i = 0; i < formInputs.length; i++) {
 			formInputs[i].parentNode.classList.remove('hide')
 		}
 	}
@@ -208,14 +224,14 @@ import {
 	}
 
 
-	function chooseObject($select) {
+	/*function chooseObject($select) {
 		if (typeof + ($select.value) == 'number') {
 			chosenObj = objectsArr[+($select.value)]
 			return chosenObj
 		} else {
 			return false
 		}
-	}
+	}*/
 
 	//Заполнение полей ввода данными из выбранного объекта
 	function fulfillPageInputs(chosenObj) {
@@ -226,6 +242,8 @@ import {
 		document.getElementById('objectName').value = chosenObj.name
 		document.getElementById('objectEstimate').value = prepareValueToDisplay(chosenObj.estimate.ownCost)
 		document.getElementById('objectArea').value = prepareValueToDisplay(chosenObj.estate.totalSquare)
+		form.additionalInfo.value = String(chosenObj.additional)
+		console.log(chosenObj.additionalInfo)
 
 		showFilledInput(chosenObj.estate, 'flats', 'flatsSquare')
 		showFilledInput(chosenObj.estate, 'offices', 'officesSquare')
@@ -255,8 +273,7 @@ import {
 		if (chosenObj[estateType][inputType]) {
 			document.getElementById(inputType).value = prepareValueToDisplay(chosenObj[estateType][inputType])
 			document.getElementById(inputType).parentNode.classList.remove('hide')
-		}
-		else{
+		} else {
 			document.getElementById(inputType).value = ''
 			document.getElementById(inputType).parentNode.classList.add('hide')
 		}
@@ -289,6 +306,29 @@ import {
 	}
 
 
+	function setDefaultForm() {
+
+		clearInputsValues(necessaryInputs)
+
+		elementsHandler('show', document.getElementById('passportUl').getElementsByTagName('li'))
+		clearInputsValues(unnecessaryInputs)
+
+		elementsHandler('show', document.getElementById('markupUl').getElementsByTagName('li'))
+		clearInputsValues(markupInputs)
+
+		elementsHandler('show', document.getElementById('priceUl').getElementsByTagName('li'))
+		clearInputsValues(priceInputs)
+
+		document.getElementById('totalRevenue').value = ''
+
+		hideSecondHalfOfForm()
+		/*inputsHandler('disable', )
+		unnecessaryInputs
+		markupInputs
+		priceInputs*/
+	}
+
+
 	window.addEventListener('load', () => {
 		objectsArr = loadObjects()
 		showLoadedData(objectsArr, objectsPageSelect)
@@ -302,13 +342,15 @@ import {
 
 
 	objectsPageSelect.addEventListener('change', () => {
-		chosenObj = chooseObject(objectsPageSelect)
+		chosenObj = chooseObject(objectsPageSelect, objectsArr)
 		if (chosenObj) {
 			fulfillPageInputs(chosenObj)
 			showSecondHalfOfForm()
 			countPriceButton.classList.add('hide')
 			volumesOfCashSaveButton.classList.add('hide')
 			deleteObjectButton.classList.remove('hide')
+		} else {
+			setDefaultForm()
 		}
 	})
 
@@ -347,34 +389,24 @@ import {
 
 	volumesOfCashSaveButton.addEventListener('click', (event) => {
 		event.preventDefault()
+		objectToSave.additional = String(form.additionalInfo.value)
 		localStorage.setItem(objectToSave.key, JSON.stringify(objectToSave))
 		objectsArr = loadObjects()
+		optionToChoose = setOptionToShow(optionToChoose, objectToSave, objectsArr)
 		clearSelect(objectsPageSelect)
 		showLoadedData(objectsArr, objectsPageSelect)
 		disableInputs(formInputs)
+		displayChosenSelectOption(objectsPageSelect, optionToChoose)
+		countPriceButton.classList.add('hide')
+		volumesOfCashSaveButton.classList.add('hide')
+		deleteObjectButton.classList.remove('hide')
 		alert('Объект успешно сохранён.')
 	})
 
 
 	deleteObjectButton.addEventListener('click', (event) => {
-		event.preventDefault()
-		if (chosenObj) {
-			localStorage.removeItem(chosenObj.key)
-			clearInputsValues(formInputs)
-			hideSecondHalfOfForm()
-			objectsArr = loadObjects()
-			clearSelect(objectsPageSelect)
-			showLoadedData(objectsArr, objectsPageSelect)
-			disableInputs(formInputs)
-			if (objectsArr.length == 0) {
-				hideUselessButtons()
-				makeInputsAble(formInputs)
-				objectToSave = new ObjectOfBuilding()
-			}
-		}
-		else{
-			alert('Не выбран объект к удалению.')
-		}
+		localStorage.removeItem(chosenObj.key)
+		alert('Объект успешно удалён.')
 	})
 
 
