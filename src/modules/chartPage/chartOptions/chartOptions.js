@@ -170,8 +170,10 @@ export function setSellingAutoMode(chosenObj, chosenVar) {
 	let sumOfSells = Number(document.getElementById('volumeOfAutoSells').value.replace(/ /g, ""))
 
 	let month, year;
+	
+	chosenVar.revenue.changesArr[0] = 0
 
-	for (let i = 0; i < chosenVar.repaymentPeriods.length; i++) {
+	for (let i = 1; i < chosenVar.repaymentPeriods.length; i++) {
 
 		month = chosenVar.repaymentPeriods[i].slice(0, chosenVar.repaymentPeriods[i].length - 3)
 		year = chosenVar.repaymentPeriods[i].slice(chosenVar.repaymentPeriods[i].length - 2)

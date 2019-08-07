@@ -242,7 +242,7 @@ export function createCostsChart(chosenVar) {
 					label: 'Текущий объём выручки (план)',
 					fill: false,
 					lineTension: 0,
-					steppedLine: true,
+					steppedLine: 'after',
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 199, 99)',
 					data: revenueArr
@@ -251,7 +251,7 @@ export function createCostsChart(chosenVar) {
 					label: 'Доступный эскроу ресурс',
 					fill: false,
 					lineTension: 0,
-					steppedLine: true,
+					steppedLine: 'after',
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 99, 199)',
 					data: escrowArr
@@ -280,19 +280,19 @@ export function connectCostsAndRevenue(chosenVar) {
 	let [revenueArr, escrowArr] = [[], []]
 
 	let startIndex = chosenVar.repaymentPeriods.indexOf(chosenVar.periods[0])
+	
 	if (startIndex > -1) {
 		for (let i = 0; i < chosenVar.periods.length; i++) {
-			chosenVar.revenue.changesArr[i] ? revenueArr[i] = chosenVar.revenue.changesArr[startIndex] : false
-			chosenVar.escrow.changesArr[i] ? escrowArr[i] = chosenVar.escrow.changesArr[startIndex] : false
+			revenueArr[i] = chosenVar.revenue.changesArr[startIndex]
+			escrowArr[i] = chosenVar.escrow.changesArr[startIndex]
 			startIndex++
 		}
 	} else {
 		startIndex = chosenVar.periods.indexOf(chosenVar.repaymentPeriods[0])
-		console.log(startIndex)
 		if (startIndex > -1) {
 			for (let i = 0; i < chosenVar.periods.length; i++) {
-				chosenVar.revenue.changesArr[i] ? revenueArr[startIndex] = chosenVar.revenue.changesArr[i] : false
-				chosenVar.escrow.changesArr[i] ? escrowArr[startIndex] = chosenVar.escrow.changesArr[i] : false
+				revenueArr[startIndex] = chosenVar.revenue.changesArr[i]
+				escrowArr[startIndex] = chosenVar.escrow.changesArr[i]
 				startIndex++
 			}
 		}
