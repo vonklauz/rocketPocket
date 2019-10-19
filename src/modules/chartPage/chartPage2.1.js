@@ -63,9 +63,11 @@ import {
 
 import {
 	renderCostOfAttractingTable,
-	cleanCostOfAttractingTable
+	cleanCostOfAttractingTable,
 } from './tables/costOfAttractingFinance'
 
+
+import {finalCorrection} from'./tables/finalCorrection';
 
 import {
 	createCostsAndRevenueTable
@@ -171,6 +173,7 @@ import {
 		elementsHandler('hide', [chartPageSecondPart, deleteVariantButton])
 		elementsHandler('show', [chartPageFormSaveButton])
 		inputsHandler('enable', activeInputs)
+		cleanCostOfAttractingTable(chosenObj)
 		chartPageSelectVariant.value = false
 		//displayChosenSelectOption(chartPageSelectVariant)
 	})
@@ -186,7 +189,7 @@ import {
 			elementsHandler('show', [chartPageSecondPart, deleteVariantButton])
 			createDoughnutChart(chosenVar)
 			cleanTab(tab)
-			cleanCostOfAttractingTable()
+			cleanCostOfAttractingTable(chosenObj)
 
 			//Проверка на отстроенный график затрат
 			if (chosenVar.chart == true) {
@@ -309,14 +312,18 @@ import {
 		chosenVar.escrowResource.interestRate = +(document.getElementById('escrowInstallment').value)
 		chosenVar.investorA.interestRate = +(document.getElementById('investorAInstallment').value)
 		chosenVar.investorB.interestRate = +(document.getElementById('investorBInstallment').value)
+		
+		
 		//Итоговая сумма платежей по процентам банк.кредита
-		let bankInstallmentTotal = 0
+		let bankInstallmentTotal = 0;
 		//Итоговая сумма платежей по процентам эскроу ресурса
-		let escrowInstalmentTotal = 0
+		let escrowInstalmentTotal = 0;
 		//Итоговая сумма платежей по процентам инвестор А
-		let investorAInstallmentTotal = 0
+		let investorAInstallmentTotal = 0;
 		//Итоговая сумма платежей по процентам инвестор В
-		let investorBInstallmentTotal = 0
+		let investorBInstallmentTotal = 0;
+		//Стоимость привлечённых ресурсов, рассчитанных по ставке эскроу кредита. Необходима для подсчёта чистой прибыли застройщика.
+		let sumOfAttractiveResourcesWithEscrowInterestRate = 0;
 		cleanTab(tab)
 		$('#chartPageTable').hide().fadeIn(500);
 		for (let i = 0; i < chosenVar.periods.length; i++) {
@@ -332,7 +339,10 @@ import {
 						<td class="investorBTd">${checkPercentPayment(chosenVar.investorB.changesArr[i], chosenVar.investorB.interestRate)}</td>
 						<td>${(sumMonthlyPayments(chosenVar.bankCredit.changesArr[i], chosenVar.bankCredit.interestRate) + sumMonthlyPayments(chosenVar.escrowResource.changesArr[i], chosenVar.escrowResource.interestRate) + sumMonthlyPayments(chosenVar.investorA.changesArr[i], chosenVar.investorA.interestRate) + sumMonthlyPayments(chosenVar.investorB.changesArr[i], chosenVar.investorB.interestRate)).toFixed(0).replace(/(\d)(?=(\d{3})+(\D|$))/g, '$1 ')}</td>
 				</tr>`
-			tab.insertAdjacentHTML('beforeend', $el)
+			tab.insertAdjacentHTML('beforeend', $el);
+			
+			//Подсчёт стоимости привлечёнки по фиксированной ставке эскроу кредита для вычисления чистой прибыли застройщика в следующей таблице
+			
 		}
 		let $totalEl = `<tr>
 						<td>Итого по отдельным источникам:</td>
@@ -349,12 +359,14 @@ import {
 						<th></th>
 						<th></th>
 					</tr>`
-
+		
 		tab.insertAdjacentHTML('beforeend', $totalEl)
+		
 		chosenVar.costOfAttractiveFinance = bankInstallmentTotal + escrowInstalmentTotal + investorAInstallmentTotal + investorBInstallmentTotal
-
+		
 		renderCostOfAttractingTable(chosenObj, chosenVar)
-
+		saveChangesInChosenVar(chosenObj, chosenVar)
+		
 		if (chosenVar.revenueChart == true) {
 			checkRevenue(chosenVar)
 			checkEscrow(chosenVar)
@@ -508,4 +520,12 @@ import {
 			alert('Для построения графика необходимо задать доступный процент от продаж для эскроу кредитования.')
 		}
 	})
+	
+	document.getElementById('countFinalEscrowPercents').addEventListener('click', () => {
+		
+		let ratePercent = +document.getElementById('percentOfRedutionRate').value;	
+		let escrowPercent = +document.getElementById('revenueInPercentsOfEscrow').value;
+		finalCorrection (ratePercent, escrowPercent, chosenVar);
+	});
+	
 }())

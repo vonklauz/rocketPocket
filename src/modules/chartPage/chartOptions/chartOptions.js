@@ -69,6 +69,13 @@ export function addCashToChart(chosenVar, source, volume, month, year, operation
 	if (operation == '-') {
 		sourceVolume = +(volume.replace(/ /g, "")) * -1
 
+		if (periodsArr == chosenVar.repaymentPeriods) {
+			if ((chosenVar[source].changesArr[indexOfDate] - (chosenVar[source].changesArr[indexOfDate - 1]) < sourceVolume * (-1))) {
+				alert('Введённое число превышает вложенный объём средств в выбранном периоде.')
+				return
+			}
+		}
+
 		if (chosenVar[source].currentBalance - sourceVolume > chosenVar[source].defaultBalance) {
 			alert('Превышен изначальный объём финансирования указанного источника. Введите меньшую сумму.')
 			return
@@ -170,7 +177,7 @@ export function setSellingAutoMode(chosenObj, chosenVar) {
 	let sumOfSells = Number(document.getElementById('volumeOfAutoSells').value.replace(/ /g, ""))
 
 	let month, year;
-	
+
 	chosenVar.revenue.changesArr[0] = 0
 
 	for (let i = 1; i < chosenVar.repaymentPeriods.length; i++) {
@@ -192,7 +199,7 @@ export function setSellingAutoMode(chosenObj, chosenVar) {
 export function checkAvailableEscrow() {
 	let availableEscrow = Number(document.getElementById('escrowPercents').value)
 
-	if (availableEscrow <= 0 || availableEscrow >= 100) {
+	if (availableEscrow <= 0 || availableEscrow > 100) {
 		alert("Указан некорректный процент допустимого эскроу.")
 		return false
 	}
@@ -303,18 +310,16 @@ export function refreshRevenueLine(chosenVar) {
 	for (let i = 1; i < chosenVar.repaymentPeriods.length; i++) {
 
 		let item = revenueArr[i] - revenueArr[i - 1]
-		
-		if(item + revenueArr[i - 1] < chosenVar.revenue.defaultBalance) {
+
+		if (item + revenueArr[i - 1] < chosenVar.revenue.defaultBalance) {
 			chosenVar.revenue.changesArr[i] = revenueArr[i]
 			chosenVar.revenue.currentBalance -= item
 			chosenVar.revenue.currentSpended += item
-		}
-		
-		else{
+		} else {
 			chosenVar.revenue.changesArr[i] = chosenVar.revenue.defaultBalance
 			chosenVar.revenue.currentBalance = 0
 			chosenVar.revenue.currentSpended = chosenVar.revenue.defaultBalance
 		}
-		
+
 	}
 }

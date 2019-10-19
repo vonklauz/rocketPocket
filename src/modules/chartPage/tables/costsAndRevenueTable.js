@@ -10,7 +10,7 @@ export function createCostsAndRevenueTable(chosenVar) {
 	let totalDeficite = (availableEscrowArr[0] || 0) - (chosenVar.escrowResource.changesArr[0] || 0)
 	
 	table.innerHTML = ''
-	//countCostsAndRevenue(availableEscrowArr[0], chosenVar.escrowResource.changesArr[0], chosenVar.periods[0], totalDeficite)
+	
 	table.insertAdjacentHTML('afterbegin', `<tr> <th>Месяц</th> <th>Разница между доступным и необходимым</th> <th>Нарастающий итог</th> </tr>`)
 	table.insertAdjacentHTML('beforeend', countCostsAndRevenue(availableEscrowArr[0], chosenVar.escrowResource.changesArr[0], chosenVar.periods[0], totalDeficite))
 	

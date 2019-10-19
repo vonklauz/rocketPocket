@@ -361,6 +361,7 @@ main {
 #setRevenuePeriod:hover,
 #enterRevenueCashButton:hover,
 #removeRevenueCashButton:hover,
+#countFinalEscrowPercents:hover,
 .object__passport__textarea:focus,
 .object__passport__textarea:hover,
 .app_select:hover,
@@ -588,8 +589,9 @@ main {
 #removeCashButton,
 #setRevenuePeriod,
 #enterRevenueCashButton,
-#removeRevenueCashButton {
-	height: 20%;
+#removeRevenueCashButton,
+#countFinalEscrowPercents{
+	/*height: 20%;*/
 	-webkit-transition: .5s;
 	-o-transition: .5s;
 	transition: .5s;
@@ -627,7 +629,7 @@ main {
 }
 
 .basic_app_table {
-	width: 85%;
+	min-width: 85%;
 }
 
 .narrowTd{
@@ -654,6 +656,21 @@ td {
 	-webkit-box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	box-shadow: 0px 1px 10px 1px rgba(28, 32, 51, .15);
 	border-radius: 5px;
+}
+
+.costOfAttractingFinanceTable_input{
+	width: 100%;
+	border: none;
+	text-align: center;
+}
+
+.costOfAttractingFinanceTable_td{
+	width: 10%;
+}
+
+#builderNetProfitTd,
+#actualProfabilityTd {
+	font-weight: 650;
 }
 
 .revenue_chart__aside {
@@ -684,16 +701,28 @@ td {
 	width: 85%;
 }
 
-#costsAndRevenueTable{
+#costsAndRevenueTable, 
+#finalCorrectionTable {
 	width: 50%;
 }
 
 .greenTd{
-	background-color: rgba(99, 199, 99, .3);
+	background-color: rgba(99, 199, 99, .6);
 }
 
 .redTd{
-	background-color: rgba(255, 99, 132, 0.66);
+	background-color: rgba(255, 99, 132, .6);
+}
+
+
+.finalCorrectionTable_wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	margin-top: 20px;
 }
 
 /*END chart and sources page styles*/

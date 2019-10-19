@@ -57,7 +57,7 @@ export function createRevenueChart(chosenObj, chosenVar) {
 					label: 'Текущий объём выручки (план)',
 					fill: false,
 					lineTension: 0,
-					steppedLine: 'after',
+					steppedLine: false,
 					backgroundColor: 'rgba(99, 199, 99, .2)',
 					borderColor: 'rgb(99, 199, 99)',
 					data: chosenVar.revenue.changesArr
@@ -66,7 +66,7 @@ export function createRevenueChart(chosenObj, chosenVar) {
 					label: 'Доступный эскроу ресурс',
 					fill: false,
 					lineTension: 0,
-					steppedLine: 'after',
+					steppedLine: false,
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 99, 199)',
 					data: chosenVar.escrow.changesArr
@@ -242,7 +242,7 @@ export function createCostsChart(chosenVar) {
 					label: 'Текущий объём выручки (план)',
 					fill: false,
 					lineTension: 0,
-					steppedLine: 'after',
+					steppedLine: false,
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 199, 99)',
 					data: revenueArr
@@ -251,7 +251,7 @@ export function createCostsChart(chosenVar) {
 					label: 'Доступный эскроу ресурс',
 					fill: false,
 					lineTension: 0,
-					steppedLine: 'after',
+					steppedLine: false,
 					backgroundColor: 'rgba(99, 99, 199, .2)',
 					borderColor: 'rgb(99, 99, 199)',
 					data: escrowArr
